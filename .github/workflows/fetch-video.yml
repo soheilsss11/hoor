@@ -1,0 +1,66 @@
+name: Fetch Aparat video
+
+on:
+  push:
+    branches:
+      - 'arena/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/01a0e00e-hoor
+
+      - name: Download video + poster from Aparat
+        run: |
+          set -e
+          mkdir -p assets/media
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+          API="https://www.aparat.com/etc/api/video/videohash/fac52y3"
+          echo "== Fetching Aparat API =="
+          curl -sL -A "$UA" "$API" -o /tmp/aparat.json
+          python3 - <<'PY'
+          import json
+          d = json.load(open('/tmp/aparat.json'))
+          v = d['video']
+          urls = v.get('file_link_all') or []
+          # prefer 720p for size, fall back to whatever exists
+          pick = None
+          for pref in ('720p', '480p', '1080p', '360p'):
+              for u in urls:
+                  if u.get('profile') == pref and u.get('urls'):
+                      pick = u['urls'][0]; break
+              if pick: break
+          if not pick:
+              pick = v.get('file_link', '').replace('.apt?', '.mp4?')
+          poster = v.get('big_poster', '')
+          open('/tmp/urls.txt', 'w').write(pick + '\n' + poster + '\n')
+          print('VIDEO_URL picked')
+          print('POSTER_URL picked')
+          PY
+          VIDEO_URL=$(sed -n '1p' /tmp/urls.txt)
+          POSTER_URL=$(sed -n '2p' /tmp/urls.txt)
+          echo "== Downloading video =="
+          curl -fL -A "$UA" --retry 3 -o assets/media/hoor-intro.mp4 "$VIDEO_URL"
+          echo "== Downloading poster =="
+          curl -fL -A "$UA" --retry 3 -o assets/media/hoor-video-poster.jpg "$POSTER_URL" || echo "poster failed (non-fatal)"
+          ls -la assets/media/
+          file assets/media/hoor-intro.mp4 || true
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/media/
+          if git diff --cached --quiet; then
+            echo "Nothing to commit"
+          else
+            git commit -m "chore: add Aparat intro video + poster [skip ci]"
+            git push origin arena/01a0e00e-hoor
+          fi
