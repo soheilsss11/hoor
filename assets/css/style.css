@@ -327,7 +327,7 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
   border: 1.5px solid var(--beige-400);
   box-shadow: var(--shadow-1), inset 0 0 0 1px rgba(255,255,255,.7);
   font-size: .88rem; font-weight: 600; color: var(--green-900);
-  padding: .42em 1.25em .42em .5em;
+  padding: .42em .5em .42em 1.25em;
   border-radius: 999px;
 }
 .hbadge b { color: var(--brick-600); font-weight: 800; }
