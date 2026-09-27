@@ -11,6 +11,14 @@
 @font-face { font-family: "Vazirmatn"; font-style: normal; font-weight: 700; font-display: swap; src: url("../fonts/Vazirmatn-FD-NL-Bold.woff2") format("woff2"); }
 @font-face { font-family: "Vazirmatn"; font-style: normal; font-weight: 800; font-display: swap; src: url("../fonts/Vazirmatn-FD-NL-ExtraBold.woff2") format("woff2"); }
 
+/* فونت اصلی: ایران‌سنس (CDN با فالبک وزیرمتن) */
+@font-face { font-family: "IRANSans"; font-style: normal; font-weight: 300; font-display: swap; src: url("https://cdn.jsdelivr.net/npm/iransans@1.0.0/woff2/IRANSansWeb_Light.woff2") format("woff2"); }
+@font-face { font-family: "IRANSans"; font-style: normal; font-weight: 400; font-display: swap; src: url("https://cdn.jsdelivr.net/npm/iransans@1.0.0/woff2/IRANSansWeb.woff2") format("woff2"); }
+@font-face { font-family: "IRANSans"; font-style: normal; font-weight: 500; font-display: swap; src: url("https://cdn.jsdelivr.net/npm/iransans@1.0.0/woff2/IRANSansWeb_Medium.woff2") format("woff2"); }
+@font-face { font-family: "IRANSans"; font-style: normal; font-weight: 600; font-display: swap; src: url("https://cdn.jsdelivr.net/npm/iransans@1.0.0/woff2/IRANSansWeb_Medium.woff2") format("woff2"); }
+@font-face { font-family: "IRANSans"; font-style: normal; font-weight: 700; font-display: swap; src: url("https://cdn.jsdelivr.net/npm/iransans@1.0.0/woff2/IRANSansWeb_Bold.woff2") format("woff2"); }
+@font-face { font-family: "IRANSans"; font-style: normal; font-weight: 800; font-display: swap; src: url("https://cdn.jsdelivr.net/npm/iransans@1.0.0/woff2/IRANSansWeb_Bold.woff2") format("woff2"); }
+
 /* ---------- توکن‌های طراحی ---------- */
 :root {
   --green-950: #04211f;
@@ -39,7 +47,7 @@
   --ink-soft: #476460;
   --white: #ffffff;
 
-  --font: "Vazirmatn", system-ui, Tahoma, sans-serif;
+  --font: "IRANSans", "Vazirmatn", system-ui, Tahoma, sans-serif;
 
   --radius-lg: 28px;
   --radius-md: 20px;
@@ -1116,15 +1124,27 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 .footer__col a:hover::before { opacity: 1; }
 .footer__bottom {
   border-top: 1px solid rgba(237, 230, 218, .14);
-  padding-block: 1.4rem;
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-  font-size: .88rem; color: rgba(237, 230, 218, .7);
+  padding-block: 1.5rem 1.7rem;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .55rem;
+  text-align: center;
+  font-size: .88rem; color: rgba(237, 230, 218, .6);
   position: relative; z-index: 2;
 }
-.footer__made { display: inline-flex; align-items: center; gap: .5em; }
-.footer__made .i { width: 1.1em; height: 1.1em; }
+.footer__made {
+  display: inline-flex; align-items: center; gap: .55em;
+  font-weight: 600; font-size: 1rem; color: var(--cream);
+  letter-spacing: .01em;
+}
 
 /* ---------- دکمه بازگشت بالا ---------- */
+.totop::after {
+  content: ""; position: absolute; bottom: -8px; inset-inline: 18%;
+  height: 7px; border-radius: 50%;
+  background: rgba(4, 33, 31, .3); filter: blur(3.5px);
+  transition: all .4s var(--ease);
+}
+.totop:hover::after { inset-inline: 30%; opacity: .55; filter: blur(6px); }
 .totop img {
   width: 78%; height: 78%; object-fit: contain; pointer-events: none;
   transform: rotate(-90deg); /* فلش رو به بالا */
