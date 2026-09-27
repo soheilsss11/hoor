@@ -33,19 +33,6 @@
   <!-- ===== نوار پیشرفت اسکرول ===== -->
   <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
 
-  <!-- ===== بنر اطلاع‌رسانی ===== -->
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <p>
-        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 6.2 6.6.5-5 4.3 1.6 6.5L12 15.8 6.4 19.5 8 13 3 8.7l6.6-.5L12 2z"/></svg>
-        نسخهٔ جدید هور با «چک‌لیست هوشمند هفته‌به‌هفته» منتشر شد
-      </p>
-      <a href="#download" class="topbar__cta">همین حالا دریافت کن
-        <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </div>
-
   <!-- ===== هدر / ناوبری ===== -->
   <header class="header" id="header">
     <div class="container header__inner">
@@ -134,14 +121,17 @@
 
       <div class="container hero__inner">
         <div class="hero__content" data-reveal>
-          <span class="badge" data-reveal data-delay="0">
-            <i class="badge__dot" aria-hidden="true"></i>
-            همراه ۴۰ هفتهٔ بارداری، از هفتهٔ اول تا آغوش
+          <span class="hbadge" data-reveal data-delay="0">
+            <span class="hbadge__seal" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#C9B192" stroke-width="2.6" stroke-linecap="round"><path d="M4 20 V11a8 8 0 0 1 16 0"/><path d="M12 20 v-6.5a3.5 3.5 0 0 1 7 0V18" stroke="#F3EDEB"/><path d="M3 20h18"/></svg>
+            </span>
+            همراه <b>&nbsp;۴۰ هفتهٔ&nbsp;</b> بارداری، از هفتهٔ اول تا آغوش
+            <i class="hbadge__shine" aria-hidden="true"></i>
           </span>
           <h1 class="hero__title" data-reveal data-delay="1">
             <span class="hl hl--brick">آرام‌تر</span>،
             <span class="hl hl--green">آگاه‌تر</span>؛
-            <br />قدم‌به‌قدم در <span class="hero__title-arch">بارداری</span>
+            <br />قدم‌به‌قدم در <span class="hero__title-arch">بارداری<svg class="doodle" viewBox="0 0 140 74" aria-hidden="true"><path d="M126 28C124 10 70 2 34 10 2 18 0 42 32 57 64 72 122 68 135 48" fill="none" pathLength="1"/></svg></span>
           </h1>
           <p class="hero__text" data-reveal data-delay="2">
             هور یک همراه آموزشی مطمئن است؛ با محتوای علمی و به‌روز، هفته‌به‌هفته
@@ -268,49 +258,10 @@
       </a>
     </section>
 
-    <!-- ===== نوار اعتماد (مارکی) ===== -->
-    <section class="marquee" aria-label="ویژگی‌های کلی هور">
-      <div class="marquee__track" id="marqueeTrack">
-        <div class="marquee__group">
-          <span><svg class="i" viewBox="0 0 24 24"><path d="M12 2l2.4 6.2 6.6.5-5 4.3 1.6 6.5L12 15.8 6.4 19.5 8 13 3 8.7l6.6-.5L12 2z"/></svg> محتوای علمی و قابل اعتماد</span>
-          <span><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="17" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 9.5h16M9 2.8v3M15 2.8v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> هفته‌به‌هفته و شخصی‌سازی‌شده</span>
-          <span><svg class="i" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5-11-6.5z"/></svg> ویدیوهای کوتاه و کاربردی</span>
-          <span><svg class="i" viewBox="0 0 24 24"><path d="M9 12.5l2.2 2.2L15.5 10M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> چک‌لیست هوشمند هر هفته</span>
-          <span><svg class="i" viewBox="0 0 24 24"><path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> یادآورهای به‌موقع</span>
-          <span><svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-9.7-9A5.5 5.5 0 0 1 12 6.3 5.5 5.5 0 0 1 21.7 12c-2.2 4.3-9.7 9-9.7 9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> ساخته‌شده با عشق برای مادران ایران</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== آمار ===== -->
-    <section class="stats" id="stats">
-      <div class="container">
-        <div class="stats__grid">
-          <div class="stat" data-reveal>
-            <b><span class="counter" data-count="40">۰</span></b>
-            <span>هفته محتوای مرحله‌به‌مرحله</span>
-          </div>
-          <div class="stat" data-reveal data-delay="1">
-            <b><span class="counter" data-count="120">۰</span>+</b>
-            <span>ویدیوی آموزشی کوتاه</span>
-          </div>
-          <div class="stat" data-reveal data-delay="2">
-            <b><span class="counter" data-count="300">۰</span>+</b>
-            <span>مقاله و اینفوگرافیک علمی</span>
-          </div>
-          <div class="stat" data-reveal data-delay="3">
-            <b><span class="counter" data-count="4.8" data-decimal="1">۰</span></b>
-            <span>امتیاز کاربران در کافه‌بازار</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== امکانات ===== -->
     <section class="features section" id="features">
       <div class="container">
         <header class="section__head" data-reveal>
-          <span class="section__eyebrow">امکانات هور</span>
           <h2 class="section__title">همه‌چیز برای مسیر بارداری، <em>در یک همراه</em></h2>
           <p class="section__lead">
             هر روز که می‌گذرد سؤال تازه‌ای به ذهنت می‌رسد؛ هور پاسخ‌ها را
@@ -321,62 +272,38 @@
         <div class="features__grid">
           <article class="fcard" data-reveal>
             <figure class="fcard__img"><img src="assets/img/icon-weekly.webp" alt="آموزش هفته‌به‌هفته بارداری" loading="lazy" /></figure>
-            <span class="fcard__tag">محبوب مادران</span>
             <h3>آموزش هفته‌به‌هفته</h3>
             <p>هر هفته چه اتفاقی برای بدن تو و رشد کوچولو می‌افتد؛ کوتاه، دقیق و بدون اغراق، درست سر وقتش.</p>
-            <a href="#download" class="fcard__link">بیشتر بدانید
-              <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
           </article>
 
           <article class="fcard" data-reveal data-delay="1">
             <figure class="fcard__img"><img src="assets/img/icon-videos.webp" alt="ویدیوهای آموزشی بارداری" loading="lazy" /></figure>
-            <span class="fcard__tag fcard__tag--brick">+۱۲۰ ویدیو</span>
             <h3>ویدیوهای آموزشی</h3>
             <p>تمرین‌های تنفس، ورزش‌های دوران بارداری و نکات بهداشتی، در ویدیوهای چند‌دقیقه‌ای و باکیفیت.</p>
-            <a href="#download" class="fcard__link">بیشتر بدانید
-              <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
           </article>
 
           <article class="fcard" data-reveal data-delay="2">
             <figure class="fcard__img"><img src="assets/img/icon-articles.webp" alt="مقاله‌ها و اینفوگرافیک‌های بارداری" loading="lazy" /></figure>
-            <span class="fcard__tag fcard__tag--mint">به‌روزرسانی هفتگی</span>
             <h3>مقاله و اینفوگرافیک</h3>
             <p>پاسخ علمی و ساده به پرسش‌هایی که هر روز به ذهنت می‌رسد؛ از تغذیه و خواب تا آمادگی برای زایمان.</p>
-            <a href="#download" class="fcard__link">بیشتر بدانید
-              <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
           </article>
 
           <article class="fcard" data-reveal>
             <figure class="fcard__img"><img src="assets/img/icon-checklist.webp" alt="چک‌لیست هوشمند بارداری" loading="lazy" /></figure>
-            <span class="fcard__tag">جدید</span>
             <h3>چک‌لیست هوشمند</h3>
             <p>کارهای هر هفته را ببین، تیک بزن و با خیال راحت جلو برو؛ از آزمایش‌ها تا آماده‌کردن وسایل بیمارستان.</p>
-            <a href="#download" class="fcard__link">بیشتر بدانید
-              <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
           </article>
 
           <article class="fcard" data-reveal data-delay="1">
             <figure class="fcard__img"><img src="assets/img/icon-calendar.webp" alt="تقویم و روند بارداری" loading="lazy" /></figure>
-            <span class="fcard__tag fcard__tag--brick">شخصی‌سازی‌شده</span>
             <h3>تقویم و روند بارداری</h3>
             <p>هفته و روز بارداری‌ات را دنبال کن و رشد نوزادت را هر هفته با یک میوهٔ آشنای دل‌نشین قیاس کن.</p>
-            <a href="#download" class="fcard__link">بیشتر بدانید
-              <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
           </article>
 
           <article class="fcard" data-reveal data-delay="2">
             <figure class="fcard__img"><img src="assets/img/icon-reminders.webp" alt="یادآورها و پیگیری بارداری" loading="lazy" /></figure>
-            <span class="fcard__tag fcard__tag--mint">همیشه همراه</span>
             <h3>یادآورها و پیگیری</h3>
             <p>قرص‌ها، آزمایش‌ها و ویزیت‌هایت را هور یادآوری می‌کند تا هیچ‌چیز مهم از قلم نیفتد.</p>
-            <a href="#download" class="fcard__link">بیشتر بدانید
-              <svg class="i" viewBox="0 0 24 24"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
           </article>
         </div>
       </div>
@@ -453,8 +380,8 @@
         </header>
 
         <div class="showcase__wrap">
-          <button class="showcase__arrow showcase__arrow--next" id="scNext" aria-label="صفحهٔ بعد">
-            <svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button class="arrbtn arrbtn--flip showcase__btn showcase__btn--next" id="scNext" aria-label="صفحهٔ بعد">
+            <img src="assets/img/ui-arrow.webp" alt="" aria-hidden="true" />
           </button>
           <div class="showcase__track" id="showcaseTrack" dir="ltr">
             <div class="showcase__slide is-current" dir="rtl">
@@ -606,8 +533,8 @@
               <p>هر هفته، فهرست کارهای همان هفته؛ تیک بزن و با خیال راحت جلو برو.</p>
             </div>
           </div>
-          <button class="showcase__arrow showcase__arrow--prev" id="scPrev" aria-label="صفحهٔ قبل">
-            <svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <button class="arrbtn showcase__btn showcase__btn--prev" id="scPrev" aria-label="صفحهٔ قبل">
+            <img src="assets/img/ui-arrow.webp" alt="" aria-hidden="true" />
           </button>
         </div>
         <div class="showcase__dots" id="showcaseDots" role="tablist" aria-label="انتخاب صفحه"></div>
@@ -675,54 +602,54 @@
     <section class="testi section" id="testimonials">
       <div class="container">
         <header class="section__head" data-reveal>
-          <span class="section__eyebrow">نظر مادران</span>
+          <span class="section__eyebrow eyebrow--chat">نظر مادران<span class="typing" aria-hidden="true"><em></em><em></em><em></em></span></span>
           <h2 class="section__title">مادرانی که با <em>هور</em> آرام‌تر شدند</h2>
           <p class="section__lead">بیش از ۲٬۴۰۰ مادر در کنار ما مسیر بارداری‌شان را طی کرده‌اند؛ این‌ها بخشی از تجربه‌هایشان است.</p>
         </header>
 
         <div class="testi__slider" id="testiSlider" data-reveal>
           <div class="testi__track" id="testiTrack">
-            <figure class="tcard">
-              <span class="tcard__quote" aria-hidden="true">”</span>
+            <figure class="tcard" style="--rot:-1.5deg">
+              <span class="tcard__tape" aria-hidden="true"></span>
               <div class="tcard__stars" aria-label="امتیاز ۵ از ۵">★★★★★</div>
               <blockquote>از هفتهٔ ششم با هور همراه شدم؛ چک‌لیست‌ها باعث شدند هیچ آزمایشی را فراموش نکنم. واقعاً حس می‌کنم یک مشاور آگاه همیشه جیبم است.</blockquote>
               <figcaption>
                 <img src="assets/img/avatar-1.webp" alt="نیلوفر، مادر باردار" loading="lazy" />
                 <div><b>نیلوفر رضایی</b><small>تهران · هفتهٔ ۳۰ بارداری</small></div>
-                <span class="tcard__badge">کاربر تأییدشده</span>
               </figcaption>
+              <span class="tcard__stamp" aria-hidden="true">✓ مادر هور</span>
             </figure>
 
-            <figure class="tcard">
-              <span class="tcard__quote" aria-hidden="true">”</span>
+            <figure class="tcard" style="--rot:1.3deg">
+              <span class="tcard__tape" aria-hidden="true"></span>
               <div class="tcard__stars" aria-label="امتیاز ۵ از ۵">★★★★★</div>
               <blockquote>برای بارداری دومم هور را نصب کردم؛ ویدیوهای کوتاهش دقیقاً همان چیزی بود که می‌خواستم، بدون بحث‌های طولانی و گیج‌کننده.</blockquote>
               <figcaption>
                 <img src="assets/img/avatar-2.webp" alt="سارا، مادر دوباره" loading="lazy" />
                 <div><b>سارا محمدی</b><small>مشهد · مادر دوباره</small></div>
-                <span class="tcard__badge">کاربر تأییدشده</span>
               </figcaption>
+              <span class="tcard__stamp" aria-hidden="true">✓ مادر هور</span>
             </figure>
 
-            <figure class="tcard">
-              <span class="tcard__quote" aria-hidden="true">”</span>
+            <figure class="tcard" style="--rot:-1deg">
+              <span class="tcard__tape" aria-hidden="true"></span>
               <div class="tcard__stars" aria-label="امتیاز ۴.۸ از ۵">★★★★★</div>
               <blockquote>اولین بارداری‌ام پر از سؤال بود؛ مقاله‌های هور هر شب قبل از خواب همراهم بود و خیلی از استرس‌هایم را کم کرد. به هر مادری پیشنهادش می‌کنم.</blockquote>
               <figcaption>
                 <img src="assets/img/avatar-3.webp" alt="الناز، بارداری اول" loading="lazy" />
                 <div><b>الناز کریمی</b><small>اصفهان · هفتهٔ ۱۸ بارداری</small></div>
-                <span class="tcard__badge">کاربر تأییدشده</span>
               </figcaption>
+              <span class="tcard__stamp" aria-hidden="true">✓ مادر هور</span>
             </figure>
           </div>
 
           <div class="testi__controls">
-            <button class="testi__arrow" id="testiPrev" aria-label="نظر قبلی">
-              <svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <button class="arrbtn" id="testiPrev" aria-label="نظر قبلی">
+              <img src="assets/img/ui-arrow.webp" alt="" aria-hidden="true" />
             </button>
             <div class="testi__dots" id="testiDots"></div>
-            <button class="testi__arrow" id="testiNext" aria-label="نظر بعدی">
-              <svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <button class="arrbtn arrbtn--flip" id="testiNext" aria-label="نظر بعدی">
+              <img src="assets/img/ui-arrow.webp" alt="" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -746,33 +673,23 @@
           </p>
           <div class="download__stores">
             <a href="#" class="store store--primary" data-store title="دانلود از کافه‌بازار">
-              <svg class="store__logo" viewBox="0 0 48 48" aria-hidden="true">
-                <path d="M10 8h28l4 8a7 7 0 0 1-4 6.3V38a2 2 0 0 1-2 2H12a2 2 0 0 1-2-2V22.3A7 7 0 0 1 6 16l4-8z" fill="#fff" opacity=".18"/>
-                <path d="M24 6c7 0 12 3 13.5 8H10.5C12 9 17 6 24 6z" fill="#C9B192"/>
-                <path d="M9 14h30l3 6a5.5 5.5 0 0 1-5 3.2 5.7 5.7 0 0 1-4.6-2.4A5.7 5.7 0 0 1 28 23a5.7 5.7 0 0 1-4-1.6 5.7 5.7 0 0 1-4 1.6 5.7 5.7 0 0 1-4.6-2.2A5.7 5.7 0 0 1 11 23 5.5 5.5 0 0 1 6 20l3-6z" fill="#B44F33"/>
-                <rect x="11" y="25" width="26" height="17" rx="2.5" fill="#F3EDEB"/>
-                <circle cx="24" cy="33.5" r="4.2" fill="none" stroke="#015350" stroke-width="2.4"/>
-                <path d="M24 29.3v-1.4M24 39v-1.3M19.8 33.5h-1.4M29.6 33.5h-1.3" stroke="#015350" stroke-width="2.2" stroke-linecap="round"/>
-              </svg>
+              <span class="store__logo"><img src="assets/img/store-bazaar.webp" alt="لوگوی کافه‌بازار" loading="lazy" /></span>
               <span class="store__text"><small>دریافت از</small><b>کافه‌بازار</b></span>
               <svg class="i store__dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19.5h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a href="#" class="store" data-store title="دانلود از مایکت">
-              <svg class="store__logo" viewBox="0 0 48 48" aria-hidden="true">
-                <circle cx="24" cy="24" r="18" fill="#fff" opacity=".14"/>
-                <path d="M13 14h22a3 3 0 0 1 3 3v1.5h-2A4 4 0 0 0 32 22v1.5h6V33a5 5 0 0 1-5 5H15a5 5 0 0 1-5-5V19.5h6A4 4 0 0 1 20 18v-4h-7z" fill="#C9B192"/>
-                <path d="M17 33.5a7 7 0 0 0 14 0" fill="none" stroke="#015350" stroke-width="2.6" stroke-linecap="round"/>
-                <circle cx="18.5" cy="27" r="1.6" fill="#015350"/><circle cx="29.5" cy="27" r="1.6" fill="#015350"/>
-              </svg>
+              <span class="store__logo">
+                <svg viewBox="0 0 48 48" role="img" aria-label="لوگوی مایکت">
+                  <circle cx="24" cy="24" r="23" fill="#1D9AD8"/>
+                  <path d="M14.5 31.5V19.8a4.8 4.8 0 0 1 9.6 0v11.7M24.1 31.5V19.8a4.8 4.8 0 0 1 9.6 0v11.7" fill="none" stroke="#F3EDEB" stroke-width="4.2" stroke-linecap="round"/>
+                  <path d="M16.8 36.2c2.1 2.9 4.6 4.2 6.9 4.2s4.8-1.3 6.9-4.2" fill="none" stroke="#F3EDEB" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+              </span>
               <span class="store__text"><small>دریافت از</small><b>مایکت</b></span>
               <svg class="i store__dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19.5h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a href="#" class="store store--ghost" data-store title="دانلود مستقیم فایل نصب">
-              <svg class="store__logo" viewBox="0 0 48 48" aria-hidden="true">
-                <rect x="8" y="6" width="32" height="36" rx="6" fill="none" stroke="#C9B192" stroke-width="3"/>
-                <path d="M24 14v12m0 0l-5-5m5 5l5-5" fill="none" stroke="#B44F33" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M16 33.5h16" stroke="#015350" stroke-width="3" stroke-linecap="round"/>
-              </svg>
+              <span class="store__logo"><img src="assets/img/store-apk.webp" alt="دانلود مستقیم فایل نصب هور" loading="lazy" /></span>
               <span class="store__text"><small>دانلود</small><b>فایل نصب مستقیم</b></span>
               <svg class="i store__dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19.5h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -826,8 +743,8 @@
       <div class="container">
         <div class="faq__grid">
           <div class="faq__intro" data-reveal>
-            <span class="section__eyebrow">سوالات متداول</span>
-            <h2 class="section__title">پرسش‌هایی که <em>زیاد</em> از ما می‌شنوید</h2>
+            <span class="section__eyebrow eyebrow--faq">سوالات متداول</span>
+            <h2 class="section__title">پرسش‌هایی که <em>زیاد</em> از ما می‌پرسید</h2>
             <p class="section__lead">اگر پاسخ سؤالت را اینجا پیدا نکردی، تیم پشتیبانی هور همیشه پاسخگوست.</p>
             <a class="btn btn--outline" href="mailto:hello@hoorapp.ir">
               <svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -885,19 +802,35 @@
     <!-- ===== فراخوان پایانی ===== -->
     <section class="cta">
       <div class="container">
-        <div class="cta__card" data-reveal>
-          <div class="cta__arches" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div class="cta__content">
-            <h2>هر هفتهٔ بارداری، یک قدم تازه است؛<br />هور قدم‌به‌قدم کنارت است.</h2>
-            <p>همین حالا شروع کن — نصب رایگان، بدون تبلیغات، برای همیشه.</p>
+        <div class="ctaCard" data-reveal>
+          <figure class="ctaCard__art" aria-hidden="true">
+            <img src="assets/img/hero-mother.webp" alt="" loading="lazy" />
+            <span class="ctaCard__ring"></span>
+          </figure>
+          <span class="floaty floaty--heart ctaCard__f1" aria-hidden="true">
+            <svg class="i" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-9.7-9A5.5 5.5 0 0 1 12 6.3 5.5 5.5 0 0 1 21.7 12c-2.2 4.3-9.7 9-9.7 9z"/></svg>
+          </span>
+          <span class="floaty floaty--leaf ctaCard__f2" aria-hidden="true">
+            <svg class="i" viewBox="0 0 24 24"><path d="M5 19C5 9 12 4 20 4c0 8-5 15-15 15zm0 0c3-6 7-9 11-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+
+          <span class="ctaCard__eyebrow" aria-hidden="true">
+            <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 20 V11a8 8 0 0 1 16 0"/><path d="M12 20 v-6.5a3.5 3.5 0 0 1 7 0V18"/><path d="M3 20h18"/></svg>
+            شروع مسیر با هور
+          </span>
+          <h2 class="ctaCard__title">هر هفتهٔ بارداری، یک قدم تازه است؛<br /><em>هور قدم‌به‌قدم کنارت است</em></h2>
+          <p class="ctaCard__text">همین حالا شروع کن — نصب رایگان، بدون تبلیغات، برای همیشه.</p>
+          <div class="ctaCard__actions">
             <a href="#download" class="btn btn--light btn--lg">
               <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19.5h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               نصب رایگان هور
             </a>
+            <a href="#video" class="ctaCard__ghost">
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5-11-6.5z" fill="currentColor"/></svg>
+              اول ویدیوی معرفی را ببین
+            </a>
           </div>
-          <figure class="cta__art" aria-hidden="true">
-            <img src="assets/img/hero-mother.webp" alt="" loading="lazy" />
-          </figure>
+          <span class="ctaCard__hint">۴۰ هفته محتوای علمی · بخش بزرگی آفلاین · رایگان</span>
         </div>
       </div>
     </section>

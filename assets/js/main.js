@@ -83,42 +83,6 @@
     revealEls.forEach((el) => el.classList.add("in-view"));
   }
 
-  /* ---------- شمارنده‌ها با اعداد فارسی ---------- */
-  const counters = $$(".counter");
-  const runCounter = (el) => {
-    const target = parseFloat(el.dataset.count);
-    const decimals = parseInt(el.dataset.decimal || "0", 10);
-    const dur = 1600;
-    const t0 = performance.now();
-    const tick = (t) => {
-      const p = Math.min((t - t0) / dur, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = toFa((target * eased).toFixed(decimals));
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    if (reduceMotion) { el.textContent = toFa(target.toFixed(decimals)); return; }
-    requestAnimationFrame(tick);
-  };
-  if ("IntersectionObserver" in window) {
-    const cio = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) { runCounter(entry.target); cio.unobserve(entry.target); }
-      });
-    }, { threshold: 0.4 });
-    counters.forEach((c) => cio.observe(c));
-  } else counters.forEach(runCounter);
-
-  /* ---------- مارکی بی‌نهایت ---------- */
-  const marqueeTrack = $("#marqueeTrack");
-  if (marqueeTrack && !reduceMotion) {
-    const group = marqueeTrack.firstElementChild;
-    // تا زمانی که نیمی از محتوا از عرض صفحه کمتر بود، گروه کپی اضافه کن
-    const clone = () => marqueeTrack.appendChild(group.cloneNode(true));
-    clone(); // دست‌کم دو نسخه برای -50%
-    let guard = 0;
-    while (marqueeTrack.scrollWidth / 2 < window.innerWidth && guard++ < 6) clone();
-  }
-
   /* ---------- پارالکس هیرو ---------- */
   const stage = $("#heroStage");
   if (stage && finePointer && !reduceMotion) {
@@ -140,6 +104,21 @@
       kick();
     });
     stage.addEventListener("pointerleave", () => { rx = ry = 0; kick(); });
+  }
+
+  /* ---------- هایلایت دنبال‌کنندهٔ نشانگر روی کارت‌های امکانات ---------- */
+  if (finePointer) {
+    $$(".fcard").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (((e.clientX - r.left) / r.width) * 100).toFixed(1) + "%");
+        card.style.setProperty("--my", (((e.clientY - r.top) / r.height) * 100).toFixed(1) + "%");
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.setProperty("--mx", "130%");
+        card.style.setProperty("--my", "-30%");
+      });
+    });
   }
 
   /* ---------- اسلایدر نمایش اپ (showcase) ---------- */
