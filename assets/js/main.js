@@ -54,12 +54,6 @@
     scrollBar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
     toTop.classList.toggle("is-visible", y > 700);
 
-    /* متر هفتهٔ بارداری — مثل شمارندهٔ تجربهٔ why.zero */
-    if (jpill && max > 0) {
-      const week = Math.min(40, Math.max(1, Math.round(1 + (y / max) * 39)));
-      jpillWeek.textContent = toFa(week);
-      jpill.classList.toggle("is-on", y > 220 && y < max - window.innerHeight * 0.5);
-    }
     if (reduceMotion) { lastY = y; return; }
 
     /* اسکیو سرعت‌محور روی سکشن‌ها */
@@ -71,12 +65,8 @@
 
     /* پارالکس اسکرولی صحنهٔ هیرو و واترمارک */
     if (heroStageEl && y < window.innerHeight) heroStageEl.style.translate = `0 ${(y * 0.1).toFixed(1)}px`;
-    if (watermarkEl && y < window.innerHeight * 1.2) watermarkEl.style.translate = `${(y * 0.05).toFixed(1)}px ${(y * -0.14).toFixed(1)}px`;
   };
-  const jpill = $("#journeyPill");
-  const jpillWeek = $("#jpillWeek");
   const heroStageEl = $("#heroStage");
-  const watermarkEl = $("#heroWatermark");
   let lastY = 0, skewT = null;
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
