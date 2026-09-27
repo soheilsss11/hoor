@@ -860,13 +860,6 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 }
 .video__playbtn .i { width: 2.4em; height: 2.4em; margin-inline-start: .12em; }
 .video__poster:hover .video__playbtn { transform: translate(-50%, -50%) scale(1.1); background: var(--green-900); }
-.video__meta {
-  position: absolute; bottom: 0; inset-inline: 0;
-  display: flex; flex-direction: column; gap: .15rem; align-items: flex-start;
-  padding: 1.1rem 1.4rem; text-align: start; color: var(--cream);
-}
-.video__meta b { font-size: 1.06rem; }
-.video__meta small { opacity: .85; font-weight: 500; }
 .video__deco { position: absolute; border-radius: 50%; z-index: 0; }
 .video__deco--1 { width: 110px; height: 110px; background: var(--mint-500); top: -34px; inset-inline-start: -26px; opacity: .7; }
 .video__deco--2 { width: 60px; height: 60px; border: 10px solid var(--beige-500); bottom: -24px; inset-inline-end: 6%; }
