@@ -11,10 +11,12 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(pointer: fine)").matches;
 
-  /* ---------- اپنینگ سینمایی: فقط جلسهٔ اول ---------- */
+  /* ---------- اپنینگ سینمایی: قفل اسکرول تا پایان پرده ---------- */
   const introEl = $(".intro");
-  if (introEl && sessionStorage.getItem("hoorIntroSeen")) introEl.remove();
-  else if (introEl) sessionStorage.setItem("hoorIntroSeen", "1");
+  if (introEl && !reduceMotion) {
+    document.body.style.overflow = "hidden";
+    setTimeout(() => { document.body.style.overflow = ""; }, 3050);
+  }
 
   /* ---------- اسکرول کرمی (Lenis — حال‌وهوای awwwards) ---------- */
   let lenis = null;
