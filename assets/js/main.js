@@ -153,8 +153,8 @@
       if (reduceMotion) return;
       scTimer = setInterval(() => goSc(scIndex + 1), 5200);
     };
-    $("#scNext").addEventListener("click", () => goSc(scIndex + 1, true));
-    $("#scPrev").addEventListener("click", () => goSc(scIndex - 1, true));
+    $("#scNext").addEventListener("click", () => goSc(scIndex - 1, true));
+    $("#scPrev").addEventListener("click", () => goSc(scIndex + 1, true));
     slides.forEach((s, i) => s.addEventListener("click", () => goSc(i, true)));
     scTrack.parentElement.addEventListener("mouseenter", () => clearInterval(scTimer));
     scTrack.parentElement.addEventListener("mouseleave", restartSc);
@@ -198,8 +198,8 @@
       if (reduceMotion) return;
       tTimer = setInterval(() => goT(tIndex + 1), 4500);
     };
-    $("#testiNext").addEventListener("click", () => goT(tIndex - 1, true));
-    $("#testiPrev").addEventListener("click", () => goT(tIndex + 1, true));
+    $("#testiNext").addEventListener("click", () => goT(tIndex + 1, true));
+    $("#testiPrev").addEventListener("click", () => goT(tIndex - 1, true));
     const slider = $("#testiSlider");
     slider.addEventListener("mouseenter", () => clearInterval(tTimer));
     slider.addEventListener("mouseleave", restartT);
