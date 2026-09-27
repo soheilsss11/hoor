@@ -11,12 +11,6 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(pointer: fine)").matches;
 
-  /* ---------- اپنینگ سینمایی: قفل اسکرول تا پایان پرده ---------- */
-  const introEl = $(".intro");
-  if (introEl && !reduceMotion) {
-    document.body.style.overflow = "hidden";
-    setTimeout(() => { document.body.style.overflow = ""; }, 3050);
-  }
 
   /* ---------- اسکرول کرمی (Lenis — حال‌وهوای awwwards) ---------- */
   let lenis = null;
