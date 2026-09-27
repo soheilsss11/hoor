@@ -1,0 +1,311 @@
+/* =========================================================
+   هور — اسکریپت‌های اصلی لندینگ
+   ========================================================= */
+(() => {
+  "use strict";
+
+  const $  = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
+  const FA_DIGITS = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  const toFa = (val) => String(val).replace(/[0-9]/g, (d) => FA_DIGITS[+d]).replace(/\./g, "٫");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  /* ---------- سال جاری فوتر (شمسی) ---------- */
+  try {
+    const year = new Intl.DateTimeFormat("fa-IR", { year: "numeric" }).format(new Date());
+    $("#year").textContent = year.replace(/[^\d۰-۹]/g, "");
+  } catch (_) { /* نسخه قدیمی مرورگر: مقدار پیش‌فرض می‌ماند */ }
+
+  /* ---------- هدر چسبان + نوار پیشرفت ---------- */
+  const header = $("#header");
+  const scrollBar = $("#scrollBar");
+  const toTop = $("#toTop");
+
+  const onScroll = () => {
+    const y = window.scrollY;
+    header.classList.toggle("is-scrolled", y > 24);
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    scrollBar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+    toTop.classList.toggle("is-visible", y > 700);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
+
+  /* ---------- منوی موبایل ---------- */
+  const burger = $("#burger");
+  const mmenu = $("#mobileMenu");
+
+  const setMenu = (open) => {
+    const willOpen = open ?? !mmenu.classList.contains("is-open");
+    mmenu.classList.toggle("is-open", willOpen);
+    burger.classList.toggle("is-open", willOpen);
+    burger.setAttribute("aria-expanded", String(willOpen));
+    mmenu.setAttribute("aria-hidden", String(!willOpen));
+    document.body.style.overflow = willOpen ? "hidden" : "";
+  };
+  burger.addEventListener("click", () => setMenu());
+  $$("[data-close-menu]").forEach((el) => el.addEventListener("click", () => setMenu(false)));
+  $$(".mmenu__link, .mmenu__cta").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+  window.addEventListener("resize", () => { if (window.innerWidth > 992) setMenu(false); });
+
+  /* ---------- اسکرول‌اسپای ---------- */
+  const navLinks = $$(".nav__link");
+  const sections = navLinks
+    .map((a) => $(a.getAttribute("href")))
+    .filter(Boolean);
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        navLinks.forEach((a) =>
+          a.classList.toggle("is-active", a.getAttribute("href") === "#" + entry.target.id)
+        );
+      });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    sections.forEach((s) => spy.observe(s));
+  }
+
+  /* ---------- ریویل هنگام اسکرول ---------- */
+  const revealEls = $$("[data-reveal]");
+  revealEls.forEach((el) => el.style.setProperty("--d", el.dataset.delay || 0));
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add("in-view"); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("in-view"));
+  }
+
+  /* ---------- شمارنده‌ها با اعداد فارسی ---------- */
+  const counters = $$(".counter");
+  const runCounter = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimal || "0", 10);
+    const dur = 1600;
+    const t0 = performance.now();
+    const tick = (t) => {
+      const p = Math.min((t - t0) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = toFa((target * eased).toFixed(decimals));
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    if (reduceMotion) { el.textContent = toFa(target.toFixed(decimals)); return; }
+    requestAnimationFrame(tick);
+  };
+  if ("IntersectionObserver" in window) {
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { runCounter(entry.target); cio.unobserve(entry.target); }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach((c) => cio.observe(c));
+  } else counters.forEach(runCounter);
+
+  /* ---------- مارکی بی‌نهایت ---------- */
+  const marqueeTrack = $("#marqueeTrack");
+  if (marqueeTrack && !reduceMotion) {
+    const group = marqueeTrack.firstElementChild;
+    // تا زمانی که نیمی از محتوا از عرض صفحه کمتر بود، گروه کپی اضافه کن
+    const clone = () => marqueeTrack.appendChild(group.cloneNode(true));
+    clone(); // دست‌کم دو نسخه برای -50%
+    let guard = 0;
+    while (marqueeTrack.scrollWidth / 2 < window.innerWidth && guard++ < 6) clone();
+  }
+
+  /* ---------- پارالکس هیرو ---------- */
+  const stage = $("#heroStage");
+  if (stage && finePointer && !reduceMotion) {
+    const layers = $$("[data-depth]", stage).map((el) => ({ el, depth: +el.dataset.depth }));
+    let rx = 0, ry = 0, cx = 0, cy = 0, raf = null;
+    const animate = () => {
+      cx += (rx - cx) * 0.08; cy += (ry - cy) * 0.08;
+      layers.forEach(({ el, depth }) => {
+        el.style.translate = `${(-cx * depth) / 14}px ${(-cy * depth) / 14}px`;
+      });
+      if (Math.abs(rx - cx) > 0.001 || Math.abs(ry - cy) > 0.001) raf = requestAnimationFrame(animate);
+      else raf = null;
+    };
+    const kick = () => { if (!raf) raf = requestAnimationFrame(animate); };
+    stage.addEventListener("pointermove", (e) => {
+      const r = stage.getBoundingClientRect();
+      rx = (e.clientX - r.left) / r.width - 0.5;
+      ry = (e.clientY - r.top) / r.height - 0.5;
+      kick();
+    });
+    stage.addEventListener("pointerleave", () => { rx = ry = 0; kick(); });
+  }
+
+  /* ---------- اسلایدر نمایش اپ (showcase) ---------- */
+  const scTrack = $("#showcaseTrack");
+  if (scTrack) {
+    const slides = $$(".showcase__slide", scTrack);
+    const dotsWrap = $("#showcaseDots");
+    let scIndex = 0, scTimer = null;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.setAttribute("role", "tab");
+      dot.setAttribute("aria-label", `صفحهٔ ${toFa(i + 1)}`);
+      dot.addEventListener("click", () => goSc(i, true));
+      dotsWrap.appendChild(dot);
+    });
+    const scDots = $$("button", dotsWrap);
+
+    const goSc = (i, user = false) => {
+      scIndex = (i + slides.length) % slides.length;
+      const gap = parseFloat(getComputedStyle(scTrack).columnGap || getComputedStyle(scTrack).gap) || 0;
+      const slideW = slides[0].getBoundingClientRect().width + gap;
+      const containerW = scTrack.parentElement.getBoundingClientRect().width;
+      const x = (scIndex * slideW) - (containerW - slideW) / 2;
+      scTrack.style.transform = `translateX(${-x}px)`;
+      slides.forEach((s, j) => s.classList.toggle("is-current", j === scIndex));
+      scDots.forEach((d, j) => d.classList.toggle("is-active", j === scIndex));
+      if (user) restartSc();
+    };
+    const restartSc = () => {
+      clearInterval(scTimer);
+      if (reduceMotion) return;
+      scTimer = setInterval(() => goSc(scIndex + 1), 5200);
+    };
+    $("#scNext").addEventListener("click", () => goSc(scIndex + 1, true));
+    $("#scPrev").addEventListener("click", () => goSc(scIndex - 1, true));
+    slides.forEach((s, i) => s.addEventListener("click", () => goSc(i, true)));
+    scTrack.parentElement.addEventListener("mouseenter", () => clearInterval(scTimer));
+    scTrack.parentElement.addEventListener("mouseleave", restartSc);
+
+    let scResize;
+    window.addEventListener("resize", () => {
+      clearTimeout(scResize);
+      scResize = setTimeout(() => goSc(scIndex), 150);
+    });
+    goSc(0); restartSc();
+  }
+
+  /* ---------- اسلایدر نظرات (RTL) ---------- */
+  const tTrack = $("#testiTrack");
+  if (tTrack) {
+    const cards = $$(".tcard", tTrack);
+    const dotsWrap = $("#testiDots");
+    const perView = () => (window.innerWidth <= 720 ? 1 : window.innerWidth <= 1120 ? 2 : 3);
+    const maxIndex = () => Math.max(0, cards.length - perView());
+    let tIndex = 0, tTimer = null;
+
+    const goT = (i, user = false) => {
+      tIndex = i > maxIndex() ? 0 : i < 0 ? maxIndex() : i;
+      const gap = parseFloat(getComputedStyle(tTrack).columnGap || getComputedStyle(tTrack).gap) || 0;
+      const step = cards[0].getBoundingClientRect().width + gap;
+      tTrack.style.transform = `translateX(${tIndex * step}px)`; /* RTL: حرکت به راست */
+      $$("button", dotsWrap).forEach((d, j) => d.classList.toggle("is-active", j === tIndex));
+      if (user) restartT();
+    };
+    const buildDots = () => {
+      dotsWrap.innerHTML = "";
+      for (let i = 0; i <= maxIndex(); i++) {
+        const dot = document.createElement("button");
+        dot.setAttribute("aria-label", `گروه ${toFa(i + 1)}`);
+        dot.addEventListener("click", () => goT(i, true));
+        dotsWrap.appendChild(dot);
+      }
+    };
+    const restartT = () => {
+      clearInterval(tTimer);
+      if (reduceMotion) return;
+      tTimer = setInterval(() => goT(tIndex + 1), 4500);
+    };
+    $("#testiNext").addEventListener("click", () => goT(tIndex + 1, true));
+    $("#testiPrev").addEventListener("click", () => goT(tIndex - 1, true));
+    const slider = $("#testiSlider");
+    slider.addEventListener("mouseenter", () => clearInterval(tTimer));
+    slider.addEventListener("mouseleave", restartT);
+
+    /* سوایپ لمسی */
+    let startX = null;
+    slider.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    slider.addEventListener("touchend", (e) => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 45) goT(dx < 0 ? tIndex + 1 : tIndex - 1, true); /* RTL: سوایپ چپ = بعدی */
+      startX = null;
+    }, { passive: true });
+
+    let rT;
+    window.addEventListener("resize", () => {
+      clearTimeout(rT);
+      rT = setTimeout(() => { buildDots(); goT(Math.min(tIndex, maxIndex())); }, 150);
+    });
+    buildDots(); goT(0); restartT();
+  }
+
+  /* ---------- آکاردئون سوالات (تک‌باز با انیمیشن ارتفاع) ---------- */
+  const faqItems = $$(".faq__item");
+  const VAR_EASE = "cubic-bezier(.22,.61,.36,1)";
+  const animateClose = (item, body) => {
+    const anim = body.animate(
+      [{ height: body.scrollHeight + "px", opacity: 1 }, { height: "0px", opacity: 0 }],
+      { duration: 300, easing: "ease-in-out" }
+    );
+    anim.onfinish = () => { item.open = false; };
+  };
+  faqItems.forEach((item) => {
+    const summary = $("summary", item);
+    const body = $(".faq__body", item);
+    summary.addEventListener("click", (e) => {
+      if (reduceMotion || !body.animate) return; // رفتار پیش‌فرض details
+      e.preventDefault();
+      if (item.open) {
+        animateClose(item, body);
+      } else {
+        faqItems.forEach((o) => { if (o !== item && o.open) animateClose(o, $(".faq__body", o)); });
+        item.open = true;
+        const h = body.scrollHeight;
+        body.animate([{ height: "0px", opacity: 0 }, { height: h + "px", opacity: 1 }], { duration: 380, easing: VAR_EASE });
+      }
+    });
+  });
+
+  /* ---------- پخش ویدیو ---------- */
+  const video = $("#introVideo");
+  const poster = $("#videoPoster");
+  const ctaBtn = $("#videoCtaBtn");
+  const heroWatch = $("#heroWatchBtn");
+
+  const startVideo = () => {
+    poster.classList.add("is-hidden");
+    video.setAttribute("controls", "");
+    const p = video.play();
+    if (p && p.catch) p.catch(() => {});
+  };
+  poster.addEventListener("click", startVideo);
+  video.addEventListener("ended", () => {
+    poster.classList.remove("is-hidden");
+    video.removeAttribute("controls");
+  });
+  [ctaBtn, heroWatch].forEach((btn) => btn && btn.addEventListener("click", () => {
+    $("#video").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    setTimeout(startVideo, reduceMotion ? 0 : 650);
+  }));
+
+  /* ---------- توست دکمه‌های فروشگاه ---------- */
+  const toast = $("#toast");
+  const toastText = $("#toastText");
+  let toastTimer = null;
+  const showToast = (msg) => {
+    toastText.textContent = msg;
+    toast.classList.add("is-visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 3200);
+  };
+  $$("[data-store]").forEach((a) => a.addEventListener("click", (e) => {
+    if (a.getAttribute("href") === "#") {
+      e.preventDefault();
+      showToast("لینک دانلود فروشگاه به‌زودی فعال می‌شود — هور را دنبال کنید!");
+    }
+  }));
+})();

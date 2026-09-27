@@ -1,0 +1,19 @@
+{
+  "name": "هور — همراه آموزشی مسیر بارداری",
+  "short_name": "هور",
+  "description": "آموزش هفته‌به‌هفته بارداری، ویدیو، مقاله، چک‌لیست هوشمند و یادآورها برای مادران.",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F3EDEB",
+  "theme_color": "#015350",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

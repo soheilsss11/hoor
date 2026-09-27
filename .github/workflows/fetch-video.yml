@@ -1,9 +1,6 @@
 name: Fetch Aparat video
 
 on:
-  push:
-    branches:
-      - 'arena/**'
   workflow_dispatch:
 
 permissions:
