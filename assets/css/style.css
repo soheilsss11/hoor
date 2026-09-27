@@ -239,7 +239,7 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(180, 79, 51, .45); } 70% { box-shadow: 0 0 0 22px rgba(180, 79, 51, 0); } 100% { box-shadow: 0 0 0 0 rgba(180, 79, 51, 0); } }
 @keyframes spin-slow { to { transform: rotate(360deg); } }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-@keyframes shine { 0%, 52% { transform: translateX(-170%); } 86%, 100% { transform: translateX(170%); } }
+
 @keyframes typing { 0%, 60%, 100% { transform: translateY(0); opacity: .55; } 30% { transform: translateY(-4px); opacity: 1; } }
 @keyframes wobble { 0%, 100% { transform: rotate(-9deg); } 50% { transform: rotate(11deg); } }
 
@@ -365,31 +365,34 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 
 /* بج اختصاصی هیرو — مُهر برند + برق‌افکن دوره‌ای */
 .hbadge {
-  position: relative; overflow: hidden;
-  display: inline-block; padding: 0;
-  background: none; border: none; box-shadow: none;
-  border-radius: 18px;
+  display: inline-flex; align-items: center; gap: .7em;
+  background: rgba(255, 255, 255, .72);
+  border: 1px solid rgba(1, 83, 80, .16);
+  border-radius: 999px;
+  padding: .5em 1.25em;
+  font-size: .9rem; font-weight: 600; color: var(--green-900);
+  box-shadow: 0 10px 30px -12px rgba(1, 83, 80, .35);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: transform .3s var(--ease), border-color .3s, box-shadow .3s;
 }
-.hbadgeArt {
-  display: block; width: clamp(15rem, 100%, 26.5rem); height: auto;
-  border-radius: 18px;
-  filter: drop-shadow(0 18px 26px rgba(4, 33, 31, .3));
-  transform-origin: 50% 18%;
-  animation: plaqueSway 5.2s ease-in-out infinite;
-  transition: transform .4s var(--ease), filter .4s var(--ease);
+.hbadge:hover {
+  transform: translateY(-2px);
+  border-color: rgba(1, 83, 80, .32);
+  box-shadow: 0 16px 36px -14px rgba(1, 83, 80, .42);
 }
-.hbadge:hover .hbadgeArt {
-  transform: rotate(0deg) translateY(-4px) scale(1.02);
-  filter: drop-shadow(0 26px 34px rgba(4, 33, 31, .38));
+.hbadge b { color: var(--brick-600); font-weight: 800; }
+.hbadge__dot {
+  position: relative; flex: none;
+  width: .58em; height: .58em; border-radius: 50%;
+  background: var(--green-700);
 }
-@keyframes plaqueSway { 0%, 100% { transform: rotate(-1.1deg) translateY(0); } 50% { transform: rotate(1.1deg) translateY(-5px); } }
-.hbadge__shine {
-  position: absolute; top: 0; bottom: 0; width: 55%;
-  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,.8) 50%, transparent 80%);
-  transform: translateX(-170%);
-  animation: shine 4.2s ease-in-out infinite;
-  pointer-events: none;
+.hbadge__dot::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: var(--mint-500);
+  animation: hbadgePing 2.2s cubic-bezier(0, 0, .2, 1) infinite;
 }
+@keyframes hbadgePing { 0% { transform: scale(1); opacity: .85; } 70%, 100% { transform: scale(2.7); opacity: 0; } }
+
 
 .hero__title {
   margin-top: 1.15rem;
