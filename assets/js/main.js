@@ -11,6 +11,31 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(pointer: fine)").matches;
 
+  /* ---------- اسکرول کرمی (Lenis — حال‌وهوای awwwards) ---------- */
+  let lenis = null;
+  if (!reduceMotion && "Lenis" in window) {
+    lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    const loop = (t) => { lenis.raf(t); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  }
+  const smoothTo = (target, opts = {}) => {
+    if (lenis) { lenis.scrollTo(target, { duration: 1.2, ...opts }); return; }
+    const headerFix = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h")) || 76;
+    if (typeof target === "number") window.scrollTo({ top: target, behavior: reduceMotion ? "auto" : "smooth" });
+    else window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - headerFix - 10, behavior: reduceMotion ? "auto" : "smooth" });
+  };
+  /* لنگرهای داخلی */
+  $$('a[href^="#"]').forEach((a) => {
+    const href = a.getAttribute("href");
+    if (href.length < 2) return;
+    a.addEventListener("click", (e) => {
+      const target = $(href);
+      if (!target) return;
+      e.preventDefault();
+      smoothTo(target);
+    });
+  });
+
   /* ---------- سال جاری فوتر (شمسی) ---------- */
   try {
     const year = new Intl.DateTimeFormat("fa-IR", { year: "numeric" }).format(new Date());
@@ -28,10 +53,32 @@
     const max = document.documentElement.scrollHeight - window.innerHeight;
     scrollBar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
     toTop.classList.toggle("is-visible", y > 700);
+
+    /* متر هفتهٔ بارداری — مثل شمارندهٔ تجربهٔ why.zero */
+    if (jpill && max > 0) {
+      const week = Math.min(40, Math.max(1, Math.round(1 + (y / max) * 39)));
+      jpillWeek.textContent = toFa(week);
+      jpill.classList.toggle("is-on", y > 220 && y < max - window.innerHeight * 0.5);
+    }
+    if (reduceMotion) { lastY = y; return; }
+
+    /* اسکیو سرعت‌محور روی سکشن‌ها */
+    const v = y - lastY; lastY = y;
+    const s = Math.max(-2.4, Math.min(2.4, v * 0.055));
+    document.body.style.setProperty("--skew", s.toFixed(2) + "deg");
+    clearTimeout(skewT);
+    skewT = setTimeout(() => document.body.style.setProperty("--skew", "0deg"), 130);
+
+    /* پارالکس اسکرولی صحنهٔ هیرو */
+    if (heroStageEl && y < window.innerHeight) heroStageEl.style.translate = `0 ${(y * 0.1).toFixed(1)}px`;
   };
+  const jpill = $("#journeyPill");
+  const jpillWeek = $("#jpillWeek");
+  const heroStageEl = $("#heroStage");
+  let lastY = 0, skewT = null;
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
-  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
+  toTop.addEventListener("click", () => smoothTo(0));
 
   /* ---------- منوی موبایل ---------- */
   const burger = $("#burger");
@@ -267,9 +314,49 @@
     video.removeAttribute("controls");
   });
   [ctaBtn, heroWatch].forEach((btn) => btn && btn.addEventListener("click", () => {
-    $("#video").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    smoothTo($("#video"), { offset: -40 });
     setTimeout(startVideo, reduceMotion ? 0 : 650);
   }));
+
+  /* ---------- ریویل ماسکی کلمه‌به‌کلمهٔ تیترها ---------- */
+  if (!reduceMotion) {
+    const splitWords = (el) => {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      const nodes = []; let n;
+      while ((n = walker.nextNode())) nodes.push(n);
+      let i = 0;
+      nodes.forEach((node) => {
+        const frag = document.createDocumentFragment();
+        node.textContent.split(/(\s+)/).forEach((part) => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const span = document.createElement("span");
+          span.className = "wsplit";
+          span.innerHTML = `<span class="w" style="--i:${i++}">${part.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</span>`;
+          frag.appendChild(span);
+        });
+        node.parentNode.replaceChild(frag, node);
+      });
+    };
+    $$(".hero__title, .section__title").forEach(splitWords);
+  }
+
+  /* ---------- دکمه‌های مغناطیسی ---------- */
+  if (finePointer && !reduceMotion) {
+    $$(".btn--primary, .btn--lg, .btn--light, .arrbtn").forEach((el) => {
+      el.classList.add("magnetic");
+      el.addEventListener("pointermove", (e) => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        if (Math.hypot(dx, dy) < 90 + Math.max(r.width, r.height) / 2) {
+          el.style.transition = "none";
+          el.style.transform = `translate(${(dx * 0.26).toFixed(1)}px, ${(dy * 0.2).toFixed(1)}px)`;
+        }
+      });
+      el.addEventListener("pointerleave", () => { el.style.transition = ""; el.style.transform = ""; });
+    });
+  }
 
   /* ---------- توست دکمه‌های فروشگاه ---------- */
   const toast = $("#toast");
