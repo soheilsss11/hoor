@@ -48,19 +48,25 @@
   const scrollBar = $("#scrollBar");
   const toTop = $("#toTop");
 
-  const onScroll = () => {
-    const y = window.scrollY;
-    header.classList.toggle("is-scrolled", y > 24);
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    scrollBar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
-    toTop.classList.toggle("is-visible", y > 700);
-
-    if (reduceMotion) return;
-
-    /* پارالکس اسکرولی صحنهٔ هیرو */
-    if (heroStageEl && y < window.innerHeight) heroStageEl.style.translate = `0 ${(y * 0.1).toFixed(1)}px`;
-  };
   const heroStageEl = $("#heroStage");
+  let scrollTick = false;
+  const onScroll = () => {
+    if (scrollTick) return;
+    scrollTick = true;
+    requestAnimationFrame(() => {
+      scrollTick = false;
+      const y = window.scrollY;
+      header.classList.toggle("is-scrolled", y > 24);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      scrollBar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
+      toTop.classList.toggle("is-visible", y > 700);
+
+      if (reduceMotion) return;
+
+      /* پارالکس اسکرولی صحنهٔ هیرو */
+      if (heroStageEl && y < window.innerHeight) heroStageEl.style.translate = `0 ${(y * 0.1).toFixed(1)}px`;
+    });
+  };
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
   toTop.addEventListener("click", () => smoothTo(0));
