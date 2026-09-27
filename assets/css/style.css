@@ -227,8 +227,8 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 .brand { display: inline-flex; align-items: center; gap: .7rem; }
 .brand__mark { width: 44px; height: 44px; display: block; filter: drop-shadow(0 8px 16px rgba(1, 83, 80, .35)); transition: transform .4s var(--ease); }
 .brand:hover .brand__mark { transform: rotate(-6deg) scale(1.06); }
-.brand__svg { width: 100%; height: 100%; }
 .brand__name { font-size: 1.55rem; font-weight: 800; color: var(--green-900); letter-spacing: -.02em; }
+.brand__mark img { width: 100%; height: 100%; display: block; }
 
 .nav { display: flex; align-items: center; gap: 2rem; }
 .nav__list { display: flex; align-items: center; gap: .35rem; }
@@ -301,7 +301,7 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 .mmenu__slogan { text-align: center; color: var(--ink-soft); font-size: .86rem; }
 
 /* ---------- هیرو ---------- */
-.hero { position: relative; padding: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(4rem, 7vw, 6rem); overflow: clip; }
+.hero { position: relative; padding: clamp(1.8rem, 4vw, 3rem) 0 clamp(3rem, 5vw, 4.5rem); overflow: clip; }
 .hero__bg { position: absolute; inset: 0; pointer-events: none; }
 .hero__arch {
   position: absolute; border: 2px solid rgba(1, 83, 80, .09);
@@ -348,8 +348,8 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 }
 
 .hero__title {
-  margin-top: 1.4rem;
-  font-size: clamp(2.3rem, 1.2rem + 4.2vw, 4rem);
+  margin-top: 1.15rem;
+  font-size: clamp(1.95rem, 1.15rem + 3vw, 3.05rem);
   font-weight: 800; line-height: 1.55; color: var(--green-950);
   letter-spacing: -.015em;
 }
@@ -364,24 +364,22 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
   content: ""; position: absolute; inset-inline: 0; bottom: .1em; height: .4em;
   background: var(--mint-500); opacity: .5; z-index: -1; border-radius: 999px;
 }
-/* دورکلمه دست‌نویس با انیمیشن کشیده‌شدن */
-.hero__title-arch { position: relative; display: inline-block; z-index: 0; padding: 0 .12em; white-space: nowrap; }
-.doodle {
-  position: absolute; inset-inline: -7%; top: -16%;
-  width: 114%; height: 132%;
-  overflow: visible; z-index: -1; pointer-events: none;
+/* آیکن خمیری کنار کلمهٔ «بارداری» */
+.hero__title-arch { position: relative; display: inline-block; padding: 0 .08em; white-space: nowrap; }
+.wordico {
+  display: inline-block;
+  height: .95em; width: auto; vertical-align: -.13em;
+  margin-inline-start: .18em;
+  transform-origin: 30% 90%;
+  filter: drop-shadow(0 7px 10px rgba(4, 33, 31, .3));
+  animation: wordico 3.6s ease-in-out infinite;
 }
-.doodle path {
-  fill: none; stroke: var(--brick-500); stroke-width: 5.5; stroke-linecap: round;
-  stroke-dasharray: 1; stroke-dashoffset: 1; opacity: .8;
-  transition: stroke-dashoffset 1.35s var(--ease) .6s;
-}
-.in-view .doodle path { stroke-dashoffset: 0; }
+@keyframes wordico { 0%, 100% { transform: rotate(-9deg) translateY(0) scale(1); } 50% { transform: rotate(7deg) translateY(-.14em) scale(1.07); } }
 
-.hero__text { margin-top: 1.3rem; max-width: 34rem; color: var(--ink-soft); font-size: clamp(1rem, .95rem + .3vw, 1.14rem); }
-.hero__actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .9rem; }
+.hero__text { margin-top: 1rem; max-width: 31rem; color: var(--ink-soft); font-size: clamp(.97rem, .93rem + .25vw, 1.1rem); }
+.hero__actions { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: .9rem; }
 
-.hero__trust { margin-top: 2.2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.hero__trust { margin-top: 1.6rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .avatars { display: flex; align-items: center; }
 .avatars img, .avatars__more {
   width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
@@ -401,25 +399,16 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 .hero__rating { display: flex; flex-direction: column; font-size: .92rem; color: var(--ink-soft); }
 .stars { color: #e5a83c; letter-spacing: .12em; font-size: .95rem; line-height: 1.4; }
 
-.hero__scrolldown {
-  position: absolute; bottom: 1.6rem; inset-inline-start: 50%; transform: translateX(50%);
-  width: 30px; height: 52px; border: 2px solid var(--beige-500); border-radius: 999px;
-  display: flex; justify-content: center; padding-top: 9px; opacity: .9; z-index: 3;
-  transition: border-color .3s;
-}
-.hero__scrolldown span { width: 5px; height: 10px; border-radius: 4px; background: var(--brick-600); animation: bob 1.8s infinite; }
-.hero__scrolldown:hover { border-color: var(--brick-600); }
-
 /* استیج بصری هیرو */
 .hero__visual { position: relative; }
-.hero__stage { position: relative; height: clamp(560px, 42vw, 660px); }
+.hero__stage { position: relative; height: clamp(430px, 36vw, 530px); }
 .hero__art {
   position: absolute; top: 0; inset-inline-end: 2%;
-  width: min(74%, 380px); height: 100%;
+  width: min(72%, 310px); height: 100%;
   border-radius: 999px 999px 26px 26px;
   overflow: hidden;
   box-shadow: var(--shadow-3);
-  border: 6px solid var(--white);
+  border: 5px solid var(--white);
 }
 .hero__art img { width: 100%; height: 100%; object-fit: cover; }
 .hero__art::after {
@@ -455,7 +444,7 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 
 /* ---------- گوشی نمایشی (داخلی‌ها بر مبنای em) ---------- */
 .phone {
-  font-size: 15px; /* تمام اندازه‌های داخلی em هستند؛ با تغییر این مقدار کل گوشی مقیاس می‌شود */
+  font-size: 13.5px; /* تمام اندازه‌های داخلی em هستند؛ با تغییر این مقدار کل گوشی مقیاس می‌شود */
   width: 19.6em; height: 40.4em;
   padding: .7em;
   border-radius: 3em;
@@ -740,22 +729,24 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 .phone--show:hover { transform: translateY(-8px); }
 .showcase__slide.is-current .phone--show:hover { transform: scale(1.03) translateY(-6px); }
 
-/* ---------- دکمه‌های فلش تصویری (کاشی خمیری اختصاصی) ---------- */
+/* ---------- دکمه‌های فلش تصویری (آیکن خمیری اختصاصی) ---------- */
 .arrbtn {
-  width: 60px; height: 60px; padding: 0; flex: none;
-  border-radius: 19px; overflow: hidden;
+  width: 50px; height: 50px; padding: 0; flex: none;
+  border-radius: 50%;
   background: var(--cream-2);
-  box-shadow: 0 14px 28px -12px rgba(4, 33, 31, .45), 0 0 0 5px rgba(243, 237, 235, .35);
-  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+  border: 1.5px solid var(--beige-300);
+  display: grid; place-items: center;
+  box-shadow: 0 10px 22px -10px rgba(4, 33, 31, .35);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), background .3s;
 }
-.arrbtn img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-.arrbtn:hover { transform: translateY(-5px) scale(1.07); box-shadow: 0 20px 38px -14px rgba(4, 33, 31, .55), 0 0 0 7px rgba(243, 237, 235, .4); }
-.arrbtn:active { transform: scale(.93); }
+.arrbtn img { width: 62%; height: 62%; object-fit: contain; pointer-events: none; }
+.arrbtn:hover { transform: translateY(-4px) scale(1.08); background: #fff; box-shadow: 0 16px 30px -12px rgba(4, 33, 31, .45); }
+.arrbtn:active { transform: scale(.9); }
 .arrbtn--flip img { transform: scaleX(-1); } /* نسخهٔ چپ‌نما */
 
-.showcase__btn { position: absolute; top: 41%; z-index: 5; }
-.showcase__btn--next { inset-inline-end: -10px; }
-.showcase__btn--prev { inset-inline-start: -10px; }
+.showcase__btn { position: absolute; top: 42%; z-index: 5; }
+.showcase__btn--next { inset-inline-end: -6px; }
+.showcase__btn--prev { inset-inline-start: -6px; }
 .showcase__dots { display: flex; justify-content: center; gap: .55rem; margin-top: 1.6rem; }
 .showcase__dots button {
   width: 10px; height: 10px; border-radius: 99px;
@@ -891,13 +882,14 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 .store--primary .store__dl { color: var(--brick-600); background: var(--brick-100); }
 .store__logo {
   width: 56px; height: 56px; flex: none;
-  background: var(--white); border-radius: 17px; overflow: hidden;
+  background: var(--white); border-radius: 31%; overflow: hidden;
   display: grid; place-items: center;
   box-shadow: inset 0 0 0 1px rgba(4, 33, 31, .07), 0 10px 20px -9px rgba(4, 33, 31, .4);
   transition: transform .35s var(--ease);
 }
 .store:hover .store__logo { transform: scale(1.09) rotate(-5deg); }
-.store__logo img, .store__logo svg { width: 100%; height: 100%; object-fit: cover; }
+.store__logo img, .store__logo svg { width: 90%; height: 90%; object-fit: contain; }
+.store__logo img { border-radius: 24%; }
 .store__text { display: flex; flex-direction: column; line-height: 1.55; }
 .store__text small { font-size: .76rem; font-weight: 500; opacity: .8; }
 .store__text b { font-size: 1.08rem; font-weight: 800; }
@@ -1119,16 +1111,16 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 @media (max-width: 992px) {
   :root { --header-h: 68px; }
   .nav { display: none; }
-  .burger { display: flex; }
+  .burger { display: flex; order: -1; } /* همبرگر بالا-راست، لوگو سمت چپ */
 
-  .hero__inner { grid-template-columns: 1fr; gap: 3.5rem; }
+  .hero__inner { grid-template-columns: 1fr; gap: 2.6rem; }
   .hero__content { text-align: center; max-width: 620px; margin-inline: auto; }
   .hero__text { margin-inline: auto; }
   .hero__actions, .hero__trust { justify-content: center; }
-  .hero__stage { height: clamp(520px, 88vw, 620px); max-width: 560px; margin-inline: auto; }
-  .hero__art { inset-inline-end: 0; width: min(72%, 340px); }
+  .hero__stage { height: 420px; max-width: 470px; margin-inline: auto; }
+  .hero__art { inset-inline-end: 0; width: min(68%, 280px); }
   .hero__phone { inset-inline-start: 0; }
-  .hero__scrolldown { display: none; }
+  .phone { font-size: 12.4px; }
 
   .video__grid { grid-template-columns: 1fr; gap: 3rem; }
   .video__content { max-width: 600px; margin-inline: auto; text-align: center; }
@@ -1161,21 +1153,20 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
   .journey__grid { grid-template-columns: 1fr; }
   .tcard { flex-basis: 100%; }
   .chip--check { display: none; }
-  .hero__stage { height: 470px; }
-  .phone { font-size: 12.2px; }
-  .phone--show { font-size: 11.6px; }
+  .hero__stage { height: 400px; }
+  .phone { font-size: 11.2px; }
+  .phone--show { font-size: 11.4px; }
   .showcase__btn { display: none; }
   .footer__grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer__bottom { justify-content: center; text-align: center; }
   .ctaCard__f1, .ctaCard__f2 { display: none; }
-  .arrbtn { width: 52px; height: 52px; border-radius: 16px; }
 }
 
 @media (max-width: 480px) {
   .section { padding-block: 3.8rem; }
-  .hero { padding-top: 1.8rem; }
-  .hero__stage { height: 430px; }
-  .phone { font-size: 11px; }
+  .hero { padding-top: 1.6rem; }
+  .hero__stage { height: 365px; }
+  .phone { font-size: 10px; }
   .chip { padding: .5rem .7rem; }
   .chip b { font-size: .76rem; }
   .chip small { font-size: .66rem; }
@@ -1183,10 +1174,11 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
   .hero__actions .btn { width: 100%; }
   .hero__actions { flex-direction: column; }
   .avatars img, .avatars__more { width: 40px; height: 40px; }
-  .store__logo { width: 46px; height: 46px; border-radius: 14px; }
+  .store__logo { width: 46px; height: 46px; border-radius: 30%; }
   .ctaCard { padding-top: 5.6rem; border-radius: 180px 180px 32px 32px; }
   .ctaCard__art { width: 120px; height: 120px; top: -58px; }
   .tcard { border-radius: 12px 18px 14px 20px; }
+  .arrbtn { width: 46px; height: 46px; border-radius: 14px; }
 }
 
 /* ---------- کاهش حرکت ---------- */
@@ -1202,6 +1194,6 @@ section[id], footer { scroll-margin-top: calc(var(--header-h) + 12px); }
 
 /* ---------- پرینت ---------- */
 @media print {
-  .header, .mmenu, .totop, .toast, .hero__scrolldown, .scroll-progress { display: none !important; }
+  .header, .mmenu, .totop, .toast, .scroll-progress { display: none !important; }
   body { background: #fff; }
 }
