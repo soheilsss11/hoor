@@ -11,6 +11,11 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finePointer = window.matchMedia("(pointer: fine)").matches;
 
+  /* ---------- اپنینگ سینمایی: فقط جلسهٔ اول ---------- */
+  const introEl = $(".intro");
+  if (introEl && sessionStorage.getItem("hoorIntroSeen")) introEl.remove();
+  else if (introEl) sessionStorage.setItem("hoorIntroSeen", "1");
+
   /* ---------- اسکرول کرمی (Lenis — حال‌وهوای awwwards) ---------- */
   let lenis = null;
   if (!reduceMotion && "Lenis" in window) {
