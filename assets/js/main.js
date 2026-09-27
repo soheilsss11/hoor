@@ -69,12 +69,14 @@
     clearTimeout(skewT);
     skewT = setTimeout(() => document.body.style.setProperty("--skew", "0deg"), 130);
 
-    /* پارالکس اسکرولی صحنهٔ هیرو */
+    /* پارالکس اسکرولی صحنهٔ هیرو و واترمارک */
     if (heroStageEl && y < window.innerHeight) heroStageEl.style.translate = `0 ${(y * 0.1).toFixed(1)}px`;
+    if (watermarkEl && y < window.innerHeight * 1.2) watermarkEl.style.translate = `${(y * 0.05).toFixed(1)}px ${(y * -0.14).toFixed(1)}px`;
   };
   const jpill = $("#journeyPill");
   const jpillWeek = $("#jpillWeek");
   const heroStageEl = $("#heroStage");
+  const watermarkEl = $("#heroWatermark");
   let lastY = 0, skewT = null;
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();

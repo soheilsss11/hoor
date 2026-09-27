@@ -1345,42 +1345,81 @@ html.lenis, html.lenis body { height: auto; }
   background: var(--mint-500); animation: hbadgePing 2.2s cubic-bezier(0, 0, .2, 1) infinite;
 }
 
-/* --- روبان مارکی --- */
-.marquee {
-  position: relative; z-index: 2; display: block;
-  background: var(--green-900);
-  border-block: 1px solid rgba(171, 214, 190, .22);
-  padding: 1.1rem 0; overflow: hidden;
-  transform: rotate(-1.4deg) scale(1.03);
-  margin-block: .7rem 0;
-  box-shadow: 0 24px 44px -20px rgba(4, 33, 31, .5);
-}
-.marquee__track {
-  display: flex; align-items: center; gap: 2.4rem;
-  width: max-content;
-  animation: marqueeScan 32s linear infinite;
-}
-.marquee span {
-  font-weight: 800; white-space: nowrap; line-height: 1;
-  color: var(--cream);
-  font-size: clamp(1.25rem, 1rem + 1.8vw, 2rem);
-}
-.marquee span.o { color: transparent; -webkit-text-stroke: 1.4px var(--mint-500); }
-.marquee b { color: var(--brick-500); font-size: 1.05rem; }
-.marquee:hover .marquee__track { animation-play-state: paused; }
-@keyframes marqueeScan { to { transform: translateX(33.333%); } }
-
 /* --- دکمه‌های مغناطیسی --- */
 .magnetic { transition: transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .35s var(--ease), background .3s; }
 
 /* --- کاهش حرکت --- */
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { filter: none !important; transform: none !important; }
-  .marquee__track { animation: none !important; }
   .magnetic { transition: none !important; }
 }
 
 /* --- پرینت --- */
 @media print {
-  .jpill, .marquee { display: none !important; }
+  .jpill { display: none !important; }
 }
+
+/* =========================================================
+   HEADING CINEMA PACK — واترمارک، ریویل سه‌بعدی، متنِ جاری
+   ========================================================= */
+
+/* --- واترمارک غول‌پیکر «مادر» پشت هیرو --- */
+.hero { position: relative; overflow: hidden; }
+.hero__watermark {
+  position: absolute; z-index: 0; pointer-events: none; user-select: none;
+  inset-inline-start: -2%; top: -2%;
+  font-weight: 800; line-height: 1;
+  font-size: clamp(9rem, 24vw, 22rem);
+  color: transparent;
+  -webkit-text-stroke: 2.5px rgba(1, 83, 80, .13);
+  animation: wmDrift 9s ease-in-out infinite;
+  will-change: translate;
+}
+@keyframes wmDrift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-10px, 8px); } }
+.hero__inner { position: relative; z-index: 1; }
+
+/* --- ریویل سه‌بعدی برای تیتر هیرو --- */
+.hero__title { perspective: 900px; }
+.hero__title .wsplit .w {
+  transform: translateY(112%) rotateX(-72deg);
+  transform-origin: 50% 100%;
+  transition: transform .95s cubic-bezier(.19, 1, .22, 1);
+  transition-delay: calc(var(--i, 0) * 50ms);
+}
+
+/* --- متنِ گرادیانیِ جاری (شین حرفه‌ای) --- */
+.hl--brick {
+  background: linear-gradient(100deg, var(--brick-600) 25%, #ec9a6f 50%, var(--brick-600) 75%);
+  background-size: 240% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: textFlow 5.5s linear infinite;
+}
+.hl--green {
+  background: linear-gradient(100deg, var(--green-900) 25%, #3f9c8b 50%, var(--green-900) 75%);
+  background-size: 240% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: textFlow 5.5s linear infinite;
+}
+.section__title em {
+  background: linear-gradient(105deg, var(--brick-600) 30%, #f0c19a 50%, var(--brick-600) 70%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: textFlow 7s linear infinite;
+}
+.showcase .section__title em {
+  background: linear-gradient(105deg, var(--beige-400) 30%, #fdf6e7 50%, var(--beige-400) 70%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: textFlow 7s linear infinite;
+}
+@keyframes textFlow { to { background-position: -240% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__watermark { animation: none !important; }
+  .hl--brick, .hl--green, .section__title em { animation: none !important; background: none; }
+  .hl--brick { color: var(--brick-600); }
+  .hl--green { color: var(--green-900); }
+  .section__title em { color: var(--brick-600); }
+  .showcase .section__title em { color: var(--beige-400); }
+}
+@media print { .hero__watermark { display: none !important; } }
