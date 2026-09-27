@@ -1316,14 +1316,6 @@ html.lenis, html.lenis body { height: auto; }
 }
 .in-view .wsplit .w { transform: none; }
 
-/* --- اسکیو سرعت‌محور روی سکشن‌ها --- */
-@media (hover: hover) {
-  .features__grid, .journey__grid, .video__grid, .faq__grid, .showcase__wrap, .testi__slider {
-    transform: skewY(var(--skew, 0deg));
-    transition: transform .18s ease-out;
-    will-change: transform;
-  }
-}
 
 
 /* --- دکمه‌های مغناطیسی --- */

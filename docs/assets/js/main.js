@@ -55,20 +55,12 @@
     scrollBar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
     toTop.classList.toggle("is-visible", y > 700);
 
-    if (reduceMotion) { lastY = y; return; }
+    if (reduceMotion) return;
 
-    /* اسکیو سرعت‌محور روی سکشن‌ها */
-    const v = y - lastY; lastY = y;
-    const s = Math.max(-2.4, Math.min(2.4, v * 0.055));
-    document.body.style.setProperty("--skew", s.toFixed(2) + "deg");
-    clearTimeout(skewT);
-    skewT = setTimeout(() => document.body.style.setProperty("--skew", "0deg"), 130);
-
-    /* پارالکس اسکرولی صحنهٔ هیرو و واترمارک */
+    /* پارالکس اسکرولی صحنهٔ هیرو */
     if (heroStageEl && y < window.innerHeight) heroStageEl.style.translate = `0 ${(y * 0.1).toFixed(1)}px`;
   };
   const heroStageEl = $("#heroStage");
-  let lastY = 0, skewT = null;
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
   toTop.addEventListener("click", () => smoothTo(0));
