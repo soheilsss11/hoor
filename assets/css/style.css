@@ -1393,15 +1393,17 @@ html.lenis, html.lenis body { height: auto; }
   display: block; width: clamp(122px, 19vw, 160px); height: auto; overflow: visible;
   filter: drop-shadow(0 20px 36px rgba(0, 0, 0, .45)) drop-shadow(0 0 30px rgba(171, 214, 190, .18));
 }
-.intro__mdraw {
-  stroke-dasharray: 1; stroke-dashoffset: 1;
-  animation: archDraw 1s cubic-bezier(.4, 0, .2, 1) 1.05s forwards;
+.intro__panel {
+  clip-path: inset(101% -3% 0 0);
+  animation: panelInk .8s cubic-bezier(.45, 0, .15, 1) .1s forwards;
 }
-.intro__mdraw2 {
+@keyframes panelInk { to { clip-path: inset(-2% -3% 0 -3%); } }
+.intro__seg {
+  fill: none; stroke: #C9B192; stroke-linecap: square;
   stroke-dasharray: 1; stroke-dashoffset: 1;
-  animation: archDraw .55s cubic-bezier(.4, 0, .2, 1) 2s forwards;
+  animation: segDr .3s cubic-bezier(.45, 0, .3, 1) var(--sd, 1s) forwards;
 }
-@keyframes archDraw { to { stroke-dashoffset: 0; } }
+@keyframes segDr { to { stroke-dashoffset: 0; } }
 
 .intro__word {
   color: var(--cream); font-weight: 800; line-height: 1;

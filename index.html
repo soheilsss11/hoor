@@ -14,7 +14,7 @@
   <link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/favicon.png" />
   <link rel="manifest" href="site.webmanifest" />
-  <link rel="stylesheet" href="assets/css/style.css?v=18" />
+  <link rel="stylesheet" href="assets/css/style.css?v=19" />
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/iransans@1.0.0/woff2/IRANSansWeb.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="https://cdn.jsdelivr.net/npm/iransans@1.0.0/woff2/IRANSansWeb_Bold.woff2" as="font" type="font/woff2" crossorigin />
   <script type="application/ld+json">
@@ -37,25 +37,12 @@
     <div class="intro__content">
 <svg class="intro__logo" viewBox="-14 -14 589 789" fill="#C9B192" fill-rule="evenodd" aria-hidden="true">
         <defs>
-          <clipPath id="panelZone"><rect x="-24" y="-24" width="504" height="700"/></clipPath>
-          <clipPath id="lineZone"><rect x="480" y="-24" width="133" height="670"/><rect x="-24" y="640" width="613" height="200"/></clipPath>
-          <mask id="mLine1" maskUnits="userSpaceOnUse" x="-80" y="-80" width="721" height="921">
-            <path pathLength="1" class="intro__mdraw" fill="none" stroke="#fff" stroke-width="76" stroke-linecap="square"
-              d="M36 780 V200 C36 98 124 24 236 10 C356 -6 488 60 536 210 L554 285" />
-          </mask>
-          <mask id="mWipe" maskUnits="userSpaceOnUse" x="-80" y="-80" width="721" height="921">
-            <rect x="-24" y="700" width="528" height="780" fill="#fff">
-              <animate attributeName="y" from="700" to="-40" begin="0.15s" dur="0.8s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.45 0 0.2 1" />
-            </rect>
-          </mask>
-          <mask id="mLine2" maskUnits="userSpaceOnUse" x="-80" y="-80" width="721" height="921">
-            <path pathLength="1" class="intro__mdraw2" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="square"
-              d="M549 236 V744 M 492 744 L70 744 M 74 738 V668" />
-          </mask>
+          <clipPath id="lineClip"><path d="M483 136 L480 134 L480 164 L492 178 L506 198 L522 229 L534 267 L537 283 L537 289 L538 290 L538 298 L539 299 L539 738 L538 739 L84 739 L83 738 L83 680 L79 679 L79 669 L62 669 L62 760 L560 760 L560 299 L559 298 L559 288 L551 248 L539 215 L529 195 L515 173 L501 155 Z M342 26 L306 11 L283 5 L266 3 L265 2 L257 2 L256 1 L229 0 L228 1 L203 2 L202 3 L196 3 L181 6 L159 12 L141 19 L117 31 L97 44 L83 55 L60 77 L50 89 L27 124 L16 148 L8 172 L2 201 L1 221 L0 222 L0 668 L60 668 L60 310 L61 309 L62 285 L63 284 L65 267 L70 247 L79 223 L79 85 L80 84 L220 84 L238 77 L257 72 L273 69 L279 69 L280 68 L289 68 L290 67 L333 67 L334 68 L342 68 L381 76 L399 82 L402 84 L414 84 L384 54 L364 39 Z"/></clipPath>
         </defs>
-        <path mask="url(#mLine1)" d="M342 26 L306 11 L283 5 L266 3 L265 2 L257 2 L256 1 L229 0 L228 1 L203 2 L202 3 L196 3 L181 6 L159 12 L141 19 L117 31 L97 44 L83 55 L60 77 L50 89 L27 124 L16 148 L8 172 L2 201 L1 221 L0 222 L0 668 L60 668 L60 310 L61 309 L62 285 L68 254 L76 229 L88 202 L99 183 L118 157 L151 124 L168 111 L187 99 L211 87 L238 77 L257 72 L273 69 L279 69 L280 68 L289 68 L290 67 L333 67 L334 68 L355 70 L381 76 L409 86 L420 92 L409 78 L384 54 L364 39 Z" />
-        <path mask="url(#mWipe)" clip-path="url(#panelZone)" d="M203 117 L179 132 L159 148 L144 163 L126 185 L116 200 L104 223 L96 243 L88 273 L86 292 L85 293 L85 306 L84 307 L84 668 L83 669 L62 669 L62 760 L560 760 L560 299 L559 298 L559 288 L558 287 L556 269 L551 248 L542 222 L529 195 L509 165 L494 147 L483 136 L467 122 L452 111 L423 94 L439 118 L446 132 L445 134 L419 117 L393 105 L364 96 L349 93 L343 93 L342 92 L335 92 L334 91 L304 90 L303 91 L288 91 L287 92 L273 93 L254 97 L229 105 Z M462 146 L482 166 L498 186 L509 203 L524 234 L531 255 L537 283 L538 298 L539 299 L539 738 L538 739 L84 739 L83 738 L83 669 L84 668 L468 668 L468 220 L467 219 L467 208 L466 207 L465 194 L459 168 L453 150 L447 137 L448 135 Z" />
-        <path mask="url(#mLine2)" clip-path="url(#lineZone)" d="M203 117 L179 132 L159 148 L144 163 L126 185 L116 200 L104 223 L96 243 L88 273 L86 292 L85 293 L85 306 L84 307 L84 668 L83 669 L62 669 L62 760 L560 760 L560 299 L559 298 L559 288 L558 287 L556 269 L551 248 L542 222 L529 195 L509 165 L494 147 L483 136 L467 122 L452 111 L423 94 L439 118 L446 132 L445 134 L419 117 L393 105 L364 96 L349 93 L343 93 L342 92 L335 92 L334 91 L304 90 L303 91 L288 91 L287 92 L273 93 L254 97 L229 105 Z M462 146 L482 166 L498 186 L509 203 L524 234 L531 255 L537 283 L538 298 L539 299 L539 738 L538 739 L84 739 L83 738 L83 669 L84 668 L468 668 L468 220 L467 219 L467 208 L466 207 L465 194 L459 168 L453 150 L447 137 L448 135 Z" />
+        <path class="intro__panel" d="M443 105 L423 94 L439 118 L446 132 L445 134 L426 121 L398 107 L372 98 L349 93 L335 92 L334 91 L304 90 L303 91 L288 91 L287 92 L273 93 L247 99 L224 107 L203 117 L171 138 L159 148 L136 172 L116 200 L104 223 L96 243 L88 273 L86 292 L85 293 L85 306 L84 307 L84 668 L80 669 L80 679 L83 679 L83 669 L84 668 L468 668 L468 220 L467 219 L467 208 L466 207 L466 200 L459 168 L447 136 L448 135 L454 139 L479 163 L479 133 L467 122 Z M405 85 L420 92 L415 85 Z M80 221 L88 202 L105 174 L124 150 L143 131 L156 120 L177 105 L187 99 L217 85 L80 85 Z"/>
+        <g clip-path="url(#lineClip)">
+          <path class="intro__seg" pathLength="1" style="--sd:1.050s;stroke-width:74" d="M31 668 L31 622"/><path class="intro__seg" pathLength="1" style="--sd:1.076s;stroke-width:74" d="M31 622 L31 576"/><path class="intro__seg" pathLength="1" style="--sd:1.102s;stroke-width:74" d="M31 576 L31 530"/><path class="intro__seg" pathLength="1" style="--sd:1.128s;stroke-width:74" d="M31 530 L31 484"/><path class="intro__seg" pathLength="1" style="--sd:1.154s;stroke-width:74" d="M31 484 L31 438"/><path class="intro__seg" pathLength="1" style="--sd:1.180s;stroke-width:74" d="M31 438 L31 392"/><path class="intro__seg" pathLength="1" style="--sd:1.206s;stroke-width:74" d="M31 392 L31 346"/><path class="intro__seg" pathLength="1" style="--sd:1.232s;stroke-width:74" d="M31 346 L31 300"/><path class="intro__seg" pathLength="1" style="--sd:1.258s;stroke-width:74" d="M31 300 L31 254"/><path class="intro__seg" pathLength="1" style="--sd:1.284s;stroke-width:74" d="M31 254 L31 240"/><path class="intro__seg" pathLength="1" style="--sd:1.310s;stroke-width:87" d="M29 243 L41 173"/><path class="intro__seg" pathLength="1" style="--sd:1.336s;stroke-width:60" d="M39 180 L72 117"/><path class="intro__seg" pathLength="1" style="--sd:1.362s;stroke-width:87" d="M68 123 L119 74"/><path class="intro__seg" pathLength="1" style="--sd:1.388s;stroke-width:105" d="M113 78 L177 47"/><path class="intro__seg" pathLength="1" style="--sd:1.414s;stroke-width:78" d="M170 49 L240 39"/><path class="intro__seg" pathLength="1" style="--sd:1.440s;stroke-width:78" d="M233 39 L303 51"/><path class="intro__seg" pathLength="1" style="--sd:1.466s;stroke-width:96" d="M296 49 L359 82"/><path class="intro__seg" pathLength="1" style="--sd:1.492s;stroke-width:177" d="M353 78 L402 129"/><path class="intro__seg" pathLength="1" style="--sd:1.518s;stroke-width:141" d="M398 123 L429 187"/><path class="intro__seg" pathLength="1" style="--sd:1.544s;stroke-width:195" d="M427 180 L437 243"/><path class="intro__seg" pathLength="1" style="--sd:1.570s;stroke-width:118" d="M549 243 L549 295"/><path class="intro__seg" pathLength="1" style="--sd:1.596s;stroke-width:46" d="M549 295 L549 347"/><path class="intro__seg" pathLength="1" style="--sd:1.622s;stroke-width:46" d="M549 347 L549 399"/><path class="intro__seg" pathLength="1" style="--sd:1.648s;stroke-width:46" d="M549 399 L549 451"/><path class="intro__seg" pathLength="1" style="--sd:1.674s;stroke-width:46" d="M549 451 L549 503"/><path class="intro__seg" pathLength="1" style="--sd:1.700s;stroke-width:46" d="M549 503 L549 555"/><path class="intro__seg" pathLength="1" style="--sd:1.726s;stroke-width:46" d="M549 555 L549 607"/><path class="intro__seg" pathLength="1" style="--sd:1.752s;stroke-width:46" d="M549 607 L549 659"/><path class="intro__seg" pathLength="1" style="--sd:1.778s;stroke-width:46" d="M549 659 L549 711"/><path class="intro__seg" pathLength="1" style="--sd:1.804s;stroke-width:46" d="M549 711 L549 740"/><path class="intro__seg" pathLength="1" style="--sd:1.830s;stroke-width:46" d="M548 740 L490 740"/><path class="intro__seg" pathLength="1" style="--sd:1.856s;stroke-width:46" d="M490 740 L432 740"/><path class="intro__seg" pathLength="1" style="--sd:1.882s;stroke-width:46" d="M432 740 L374 740"/><path class="intro__seg" pathLength="1" style="--sd:1.908s;stroke-width:46" d="M374 740 L316 740"/><path class="intro__seg" pathLength="1" style="--sd:1.934s;stroke-width:46" d="M316 740 L258 740"/><path class="intro__seg" pathLength="1" style="--sd:1.960s;stroke-width:46" d="M258 740 L200 740"/><path class="intro__seg" pathLength="1" style="--sd:1.986s;stroke-width:46" d="M200 740 L142 740"/><path class="intro__seg" pathLength="1" style="--sd:2.012s;stroke-width:46" d="M142 740 L84 740"/><path class="intro__seg" pathLength="1" style="--sd:2.038s;stroke-width:46" d="M84 740 L74 740"/><path class="intro__seg" pathLength="1" style="--sd:2.064s;stroke-width:42" d="M74 738 L74 664"/>
+        </g>
       </svg>
       <div class="intro__word">هور</div>
       <div class="intro__tag">همراه مادر</div>
@@ -145,7 +132,7 @@
           <h1 class="hero__title" data-reveal data-delay="1">
             <span class="hl hl--brick">آرام‌تر</span>،
             <span class="hl hl--green">آگاه‌تر</span>؛
-            <br />قدم‌به‌قدم در <img class="heroheart" src="assets/img/word-heart.webp?v=18" alt="بارداری" />
+            <br />قدم‌به‌قدم در <img class="heroheart" src="assets/img/word-heart.webp?v=19" alt="بارداری" />
           </h1>
           <p class="hero__text" data-reveal data-delay="2">
             هور یک همراه آموزشی مطمئن است؛ با محتوای علمی و به‌روز، هفته‌به‌هفته
@@ -391,7 +378,7 @@
 
         <div class="showcase__wrap">
           <button class="arrbtn arrbtn--flip showcase__btn showcase__btn--next" id="scNext" aria-label="صفحهٔ بعد">
-            <img src="assets/img/ui-arrow.webp?v=18" alt="" aria-hidden="true" />
+            <img src="assets/img/ui-arrow.webp?v=19" alt="" aria-hidden="true" />
           </button>
           <div class="showcase__track" id="showcaseTrack" dir="ltr">
             <div class="showcase__slide is-current" dir="rtl">
@@ -544,7 +531,7 @@
             </div>
           </div>
           <button class="arrbtn showcase__btn showcase__btn--prev" id="scPrev" aria-label="صفحهٔ قبل">
-            <img src="assets/img/ui-arrow.webp?v=18" alt="" aria-hidden="true" />
+            <img src="assets/img/ui-arrow.webp?v=19" alt="" aria-hidden="true" />
           </button>
         </div>
         <div class="showcase__dots" id="showcaseDots" role="tablist" aria-label="انتخاب صفحه"></div>
@@ -666,11 +653,11 @@
 
           <div class="testi__controls">
             <button class="arrbtn" id="testiPrev" aria-label="نظر قبلی">
-              <img src="assets/img/ui-arrow.webp?v=18" alt="" aria-hidden="true" />
+              <img src="assets/img/ui-arrow.webp?v=19" alt="" aria-hidden="true" />
             </button>
             <div class="testi__dots" id="testiDots"></div>
             <button class="arrbtn arrbtn--flip" id="testiNext" aria-label="نظر بعدی">
-              <img src="assets/img/ui-arrow.webp?v=18" alt="" aria-hidden="true" />
+              <img src="assets/img/ui-arrow.webp?v=19" alt="" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -694,7 +681,7 @@
           </p>
           <div class="download__stores">
             <a href="#" class="store store--primary" data-store title="دانلود از کافه‌بازار">
-              <span class="store__logo"><img src="assets/img/store-bazaar.webp?v=18" alt="لوگوی کافه‌بازار" loading="lazy" /></span>
+              <span class="store__logo"><img src="assets/img/store-bazaar.webp?v=19" alt="لوگوی کافه‌بازار" loading="lazy" /></span>
               <span class="store__text"><small>دریافت از</small><b>کافه‌بازار</b></span>
               <svg class="i store__dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19.5h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -710,7 +697,7 @@
               <svg class="i store__dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19.5h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a href="#" class="store store--ghost" data-store title="دانلود مستقیم فایل نصب">
-              <span class="store__logo"><img src="assets/img/store-apk.webp?v=18" alt="دانلود مستقیم فایل نصب هور" loading="lazy" /></span>
+              <span class="store__logo"><img src="assets/img/store-apk.webp?v=19" alt="دانلود مستقیم فایل نصب هور" loading="lazy" /></span>
               <span class="store__text"><small>دانلود</small><b>فایل نصب مستقیم</b></span>
               <svg class="i store__dl" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19.5h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -912,7 +899,7 @@
 
       <div class="footer__bottom">
         <p class="footer__made">ساخته‌شده با
-          <img class="footer__made-heart" src="assets/img/ui-heart-red.webp?v=18" alt="قلب" />
+          <img class="footer__made-heart" src="assets/img/ui-heart-red.webp?v=19" alt="قلب" />
           برای مادران ایران
         </p>
         <p>© <span id="year">۱۴۰۵</span> هور — تمامی حقوق محفوظ است.</p>
@@ -922,7 +909,7 @@
 
   <!-- ===== دکمه بازگشت به بالا ===== -->
   <button class="totop" id="toTop" aria-label="بازگشت به بالای صفحه">
-    <img src="assets/img/ui-arrow.webp?v=18" alt="" aria-hidden="true" />
+    <img src="assets/img/ui-arrow.webp?v=19" alt="" aria-hidden="true" />
   </button>
 
   <!-- ===== اعلان (Toast) ===== -->
@@ -932,6 +919,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js" defer></script>
-  <script src="assets/js/main.js?v=18" defer></script>
+  <script src="assets/js/main.js?v=19" defer></script>
 </body>
 </html>
