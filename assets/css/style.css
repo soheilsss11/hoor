@@ -1389,16 +1389,23 @@ html.lenis, html.lenis body { height: auto; }
   animation: introContent .7s cubic-bezier(.83, 0, .17, 1) 1.95s forwards; }
 @keyframes introContent { to { opacity: 0; transform: translateY(-34px) scale(.96); } }
 
-.intro__logo { width: clamp(96px, 16vw, 128px); height: auto; overflow: visible; }
-.intro__logo path {
-  fill: none; stroke-linecap: round;
-  stroke-dasharray: 1; stroke-dashoffset: 1;
-  animation: archDraw .9s cubic-bezier(.4, 0, .2, 1) forwards;
+.intro__logo {
+  position: relative; display: block;
+  width: clamp(112px, 18vw, 150px); aspect-ratio: 1;
+  border-radius: 30%; overflow: hidden;
+  box-shadow: 0 22px 48px -12px rgba(0, 0, 0, .55), 0 0 0 1px rgba(243, 237, 235, .14), 0 0 60px -10px rgba(171, 214, 190, .35);
+  opacity: 0; transform: scale(.62) rotate(-9deg);
+  animation: logoPop .95s cubic-bezier(.34, 1.5, .5, 1) .25s forwards;
 }
-.intro__logo .a1 { stroke: #C9B192; stroke-width: 9; animation-delay: .15s; filter: drop-shadow(0 6px 14px rgba(201, 177, 146, .35)); }
-.intro__logo .a2 { stroke: #F3EDEB; stroke-width: 6; animation-delay: .62s; }
-.intro__logo .a3 { stroke: #C9B192; stroke-width: 9; animation-delay: 1.05s; }
-@keyframes archDraw { to { stroke-dashoffset: 0; } }
+.intro__logo img { width: 100%; height: 100%; display: block; }
+@keyframes logoPop { 55% { opacity: 1; transform: scale(1.07) rotate(2.2deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+.intro__sweep {
+  position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%);
+  transform: translateX(-140%);
+  animation: introSweep .85s ease 1s forwards;
+}
+@keyframes introSweep { to { transform: translateX(140%); } }
 
 .intro__word {
   color: var(--cream); font-weight: 800; line-height: 1;
