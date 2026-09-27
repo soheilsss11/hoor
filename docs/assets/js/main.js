@@ -162,9 +162,10 @@
 
     slides.forEach((_, i) => {
       const dot = document.createElement("button");
+      const target = slides.length - 1 - i;       /* ترتیب دات‌ها برعکس */
       dot.setAttribute("role", "tab");
       dot.setAttribute("aria-label", `صفحهٔ ${toFa(i + 1)}`);
-      dot.addEventListener("click", () => goSc(i, true));
+      dot.addEventListener("click", () => goSc(target, true));
       dotsWrap.appendChild(dot);
     });
     const scDots = $$("button", dotsWrap);
@@ -177,13 +178,13 @@
       const x = (scIndex * slideW) - (containerW - slideW) / 2;
       scTrack.style.transform = `translateX(${-x}px)`;
       slides.forEach((s, j) => s.classList.toggle("is-current", j === scIndex));
-      scDots.forEach((d, j) => d.classList.toggle("is-active", j === scIndex));
+      scDots.forEach((d, j) => d.classList.toggle("is-active", j === slides.length - 1 - scIndex));
       if (user) restartSc();
     };
     const restartSc = () => {
       clearInterval(scTimer);
       if (reduceMotion) return;
-      scTimer = setInterval(() => goSc(scIndex + 1), 5200);
+      scTimer = setInterval(() => goSc(scIndex - 1), 5200); /* جهت اوت‌وپلی برعکس شد */
     };
     $("#scNext").addEventListener("click", () => goSc(scIndex - 1, true));
     $("#scPrev").addEventListener("click", () => goSc(scIndex + 1, true));
