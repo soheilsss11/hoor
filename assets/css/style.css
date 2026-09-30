@@ -1733,4 +1733,4 @@ details.faq__item[open] {
    ========================================================= */
 .showcase__track { touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab; }
 .showcase__track:active { cursor: grabbing; }
-.showcase__slide img, .showcase__slide .phone--show { pointer-events: none; }
+.showcase__slide img { pointer-events: none; -webkit-user-drag: none; }
