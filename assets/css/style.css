@@ -1815,5 +1815,5 @@ details.faq__item[open] {
   overflow: hidden !important;
   scroll-snap-type: none !important;
   -webkit-overflow-scrolling: auto;
-  touch-action: pan-y;
+  touch-action: none !important;   /* ژستِ لمسی کاملاً برای درگ/اسکرولِ دستی — کروم scrollatching را نمی‌شکند */
 }

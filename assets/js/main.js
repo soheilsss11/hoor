@@ -15,6 +15,15 @@
   /* ---------- اسکرول کرمی (Lenis — حال‌وهوای awwwards) ---------- */
   let lenis = null;
   if (!reduceMotion && "Lenis" in window) {
+    /* روترِ ویل پیش از Lenis: Lenis رویداد را در capture ِ خود با stopImmediatePropagation می‌بلعد؛
+       باید قبل از او ثبت شویم تا vượt روی #showcaseTrack کار کند */
+    window.addEventListener("wheel", (e) => {
+      if (window.__hoorTrackWheel && e.target && e.target.closest && e.target.closest("#showcaseTrack")) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.__hoorTrackWheel(e);
+      }
+    }, { passive: false, capture: true });
     lenis = new Lenis({ duration: 1.15, smoothWheel: true });
     const loop = (t) => { lenis.raf(t); requestAnimationFrame(loop); };
     requestAnimationFrame(loop);
@@ -223,7 +232,7 @@
     slides.forEach((s, i) => s.addEventListener("click", () => { if (!scSuppressClick) goSc(i, true); }));
 
     /* درگِ فیزیکی (Pointer) روی scrollLeft — الگوی کاربرپسندِ سبک، بدونِ اتکا به اسکرولِ بومی (در Lenis هم سالم) */
-    let dragX = null, dragY0 = null, dragMode = null, dragL = 0, velX = 0, lastX = 0, lastT = 0, movedPx = 0, rafMom = null, rafSnap = null, bndMin = 0, bndMax = 0, dragStartIdx = 0;
+    let dragX = null, dragY0 = null, dragMode = null, dragL = 0, velX = 0, lastX = 0, lastT = 0, movedPx = 0, rafMom = null, rafSnap = null, bndMin = 0, bndMax = 0, dragStartIdx = 0, passVel = 0, passLast = 0, passT = 0;
     const maxL = () => Math.max(0, scTrack.scrollWidth - scTrack.clientWidth);
     const clampL = (v) => Math.max(0, Math.min(maxL(), v));
     const stopAnims = () => { cancelAnimationFrame(rafMom); cancelAnimationFrame(rafSnap); };
@@ -247,7 +256,13 @@
 
     scTrack.addEventListener("pointerdown", (e) => {
       dragX = e.clientX; dragY0 = e.clientY; dragMode = null; dragL = scTrack.scrollLeft; movedPx = 0;
-      dragStartIdx = scIndex;
+      passVel = 0; passLast = e.clientY; passT = performance.now();
+      try { scTrack.setPointerCapture(e.pointerId); } catch (_) {}   /* touch-action:none → ژست کاملاً دستِ ماست */
+      /* center واقعیِ اکنون (نه scIndex که ممکن است با tweenِ اتوپلی عقب/جلو افتاده باشد) */
+      const mid0 = dragL + scTrack.clientWidth / 2;
+      let near0 = 0, nd0 = Infinity;
+      slides.forEach((s, i) => { const d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - mid0); if (d < nd0) { nd0 = d; near0 = i; } });
+      dragStartIdx = near0;
       lastX = e.clientX; lastT = performance.now(); velX = 0;
       stopAnims();
       /* capture عمداً NOT اینجا: تا افقی تشخیص داده نشود، ژستِ عمودی کاملاً متعلق به اسکرولِ صفحه است */
@@ -257,17 +272,24 @@
       const dx = e.clientX - dragX;
       const dy = e.clientY - dragY0;
       if (dragMode === null) {
-        if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { dragMode = "pass"; dragX = null; return; }   /* صورت‌حسابِ عمودی برای صفحه — هیچ دخالتی */
-        if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
+        if (Math.abs(dy) > 8 && Math.abs(dy) > Math.abs(dx)) { dragMode = "pass"; clearInterval(scTimer); }
+        else if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) {
           dragMode = "drag";
-          try { scTrack.setPointerCapture(e.pointerId); } catch (_) {}
           scTrack.classList.add("is-dragging");
           clearInterval(scTimer);
           setBand(dragStartIdx);
-          dragX = e.clientX;               /* شروعِ دقیق از لحظهٔ قفلِ افقی */
+          dragX = e.clientX;
           lastX = e.clientX; lastT = performance.now(); velX = 0;
           return;
-        }
+        } else return;
+      }
+      if (dragMode === "pass") {
+        /* اسکرولِ دستیِ عمودی — اتکای صفر به رفتارِ scrollatchingِ مرورگر */
+        const nowP = performance.now();
+        const stepY = (passLast - e.clientY);
+        passVel = passVel * .6 + (stepY / Math.max(1, nowP - passT || nowP)) * 16.7 * .4;
+        passLast = e.clientY; passT = nowP;
+        window.scrollBy(0, stepY);
         return;
       }
       if (dragMode !== "drag") return;
@@ -277,16 +299,27 @@
       lastX = e.clientX; lastT = now;
       const want = dragL - dx;
       const over = want < bndMin ? want - bndMin : want > bndMax ? want - bndMax : 0;
-      const inside = Math.max(bndMin, Math.min(bndMax, want));
-      /* لبه: کشسانی ملایم (حس Embla) — بیشتر از ۴۸px کش نمی‌آید */
-      scTrack.scrollLeft = inside + Math.max(-48, Math.min(48, over * .35));
+      const inside = clampL(Math.max(bndMin, Math.min(bndMax, want)));
+      if (scTrack.style.transform) scTrack.style.transform = "";
+      scTrack.scrollLeft = inside;
+      if (over !== 0) scTrack.style.transform = `translateX(${-(Math.max(-48, Math.min(48, over * .35)))}px)`;
     });
     const endDrag = () => {
       if (dragX === null) return;
       const wasDrag = dragMode === "drag";
+      const wasPass = dragMode === "pass";
       dragX = null; dragY0 = null; dragMode = null;
       scTrack.classList.remove("is-dragging");
-      if (!wasDrag) { restartSc(); return; }
+      scTrack.style.transform = "";
+      if (wasPass) {
+        /* فلیکِ ملایم صفحه در رهاسازی */
+        if (lenis && Math.abs(passVel) > 1) {
+          lenis.scrollTo(scrollY + passVel * 140, { duration: .85, easing: (t) => 1 - Math.pow(1 - t, 3) });
+        }
+        restartSc();
+        return;
+      }
+      if (!wasDrag) return;
       if (movedPx > 8) { scSuppressClick = true; setTimeout(() => { scSuppressClick = false; }, 350); }
       /*Momentum رها */
       const mom = () => {
@@ -313,13 +346,9 @@
       goSc(best, false, !smooth);
     };
 
-    /* ویل: افقیِ دوباره‌ای (دسکتاپ) — در فازِ capture روی window؛ چون Lenis رویداد را در
-       capture ِ document با stopImmediatePropagation می‌بلعد و شنوندهٔ ترک هرگز صدا نمی‌شود */
+    /* ویل: افقیِ دوباره‌ای (دسکتاپ) — از راهِ روترِ window-capture (ثبت‌شده پیش از Lenis) */
     let scWheelT;
-    window.addEventListener("wheel", (e) => {
-      if (!e.target || !e.target.closest || !e.target.closest("#showcaseTrack")) return;
-      e.preventDefault();
-      e.stopImmediatePropagation();            /* پیش از Lenis می‌ایستیم — در capture مرحلهٔ window */
+    window.__hoorTrackWheel = (e) => {
       stopAnims();
       const mult = e.deltaMode === 1 ? 16 : 1;
       const dxm = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
@@ -327,7 +356,7 @@
       clearTimeout(scWheelT);
       clearInterval(scTimer);
       scWheelT = setTimeout(() => { snapNearest(true); restartSc(); }, 140);
-    }, { passive: false, capture: true });
+    };
 
     scTrack.addEventListener("dragstart", (e) => e.preventDefault());
     let scResize;
