@@ -236,8 +236,8 @@
       strip.style.paddingRight = pad + "px";
     };
 
-    $("#scNext").addEventListener("click", () => goSc(scIndex + 1, true));
-    $("#scPrev").addEventListener("click", () => goSc(scIndex - 1, true));
+    $("#scNext").addEventListener("click", () => goSc((scIndex + 1) % slides.length, true));
+    $("#scPrev").addEventListener("click", () => goSc((scIndex - 1 + slides.length) % slides.length, true));
     slides.forEach((s, i) => s.addEventListener("click", () => { if (!scSuppressClick) goSc(i, true); }));
 
     /* ===== درگِ تاچ: کلاچِ یکی‌یکی + مُومنتوم + کشسانِ لبه — دسکتاپ: هیچ درگی ===== */
